@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Código de Verificación</title>
+    <title>Codigo de Verificación</title>
 </head>
 <body>
     <h1>Hola! {{$nameUser}}</h1>
-    <p>Gracias por registrarte. Aquí está tu código de verificación:</p>
+    <p>Gracias por registrarte. Aqui está tu codigo de verificacion:</p>
     <h2>{{ $code }}</h2>
-    
-    <p>Por favor, introduce este código en la página de verificación para completar tu registro.</p>
+    <a href="#">verifca :v</a>
+    <p>Por favor, introduce este código en la pagina de verificacion para completar tu registro.</p>
     <p>Gracias</p>
 </body>
 </html>

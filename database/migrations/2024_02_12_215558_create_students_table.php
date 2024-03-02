@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
-            $table->string('enrollment');
+            $table->string('career');
+            $table->string('enrollment')->nullable();
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
         });

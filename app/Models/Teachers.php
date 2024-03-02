@@ -9,7 +9,9 @@ class Teachers extends Model
 
     protected $fillable = [
         'users_id',
-        'license'
+        'license',
+        'professional_title',
+        'subjects_taught'
     ];
 
     use HasFactory;

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('advisory', function (Blueprint $table) {
             $table->id();
             $table->string('tittle')->nullable();
-            $table->string('description')->nullable();
+            $table->string('status')->nullable();
             $table->date('date');
             $table->time('time');
             $table->foreignId('teachers_id');

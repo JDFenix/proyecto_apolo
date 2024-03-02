@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/js/app.js', 'resources/css/app.scss'])
-    {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <link rel="icon" href="{{ asset('images/icon_page.png') }}" type="image/x-icon">
     <title>{{ env('app.name') }}</title>
+
 </head>
 
 <body class="">
-
     
     <nav class="navbar navbar-expand-lg navbar-white bg-white border-bottom">
         @auth
@@ -108,27 +107,49 @@
                 </div>
     </nav>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- A la izquierda se encuentra una imagen -->
+            <div class="col-md-6 p-0">
+                <img src="{{ asset('images/img_forgetPassword.png') }}"
+                    style="height: 90% !important; width:90%;margin-left:18%" alt="Imagen descriptiva"
+                    class="img-fluid">
+            </div>
+            <!-- A la derecha está el formulario -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center alignCustom">
+                <!-- Cambiado a 'start' -->
+                <div class="container form-container">
+                    <h2 class="fw-bold mb-1 text-uppercase text-left CustomTextColor mb-4">¿Olvidaste tu contraseña?
+                    </h2>
+                    <p class="text-dark-50 mb-3 text-center mb-5"><strong>Ingrese su email y le enviaremos<br>un enlace
+                            para restablecer la contraseña</strong></p>
 
-    <main class="py-4">
-        @yield('footer')
-    </main>
-
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-    </script>
-
-    <script src="{{ mix('resources/js/app.js') }}" type="module"></script>
-
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-outline form-white mb-4">
+                            <input type="email" id="typeEmailX" class="form-control form-control-sm custom-input"
+                                @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"
+                                required autocomplete="email" autofocus placeholder="Correo " />
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="d-flex justify-content-center CustomTextColor mt-2"> 
+                            <a href="/" class="btn btn-outline-primary btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor">
+                                <i class="fas fa-arrow-left"></i> Regresar
+                            </a> 
+                            <a href="{{route('recoverPassword')}}" class="btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3">
+                                Enviar
+                            </a>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
