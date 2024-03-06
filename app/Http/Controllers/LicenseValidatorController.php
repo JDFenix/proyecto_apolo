@@ -32,7 +32,6 @@ class LicenseValidatorController extends Controller
         if (isset($data['body']['items']) && count($data['body']['items']) > 0) {
             $item = $data['body']['items'][0];
 
-            dd($data['body']);
             if ($this->isValid($request, $item)) {
                 return view('teacher.register')->with([
                     'name' => $item['nombre'],
@@ -43,13 +42,13 @@ class LicenseValidatorController extends Controller
             }
         }
         //this is correct
-        // return view('auth.licenseValidator')->with([
-        //     'error' => 'Los datos proporcionados no son válidos.'
-        // ]);
-
-        return view('teacher.register')->with([
+        return view('auth.licenseValidator')->with([
             'error' => 'Los datos proporcionados no son válidos.'
         ]);
+
+        // return view('teacher.register')->with([
+        //     'error' => 'Los datos proporcionados no son válidos.'
+        // ]);
     }
 
     private function isValid($request, $item)

@@ -144,6 +144,7 @@
                 </div>
     </nav>
 
+ 
 
     <div class="container">
         <div class="row justify-content-center">
@@ -155,92 +156,123 @@
 
                     <div class="form-group mt-5">
                         <label for="name">Nombre(s)*</label>
-                        <input type="text" name="name" class="custom-input-teacher form-control" id="name"
-                            {{--  value="{{ $name }}" readonly  --}}>
+                        <input type="text" name="name" class="custom-input-teacher form-control" id="name">
+
+                        @error('name')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group mt-3">
                         <label for="paternal_surname">Apellido paterno*</label>
                         <input type="text" class="form-control custom-input-teacher" name="paternal_surname"
-                            id="paternal_surname" {{--  value="{{ $paternal_surname }}" readonly  --}}>
+                            id="paternal_surname">
+
+                        @error('paternal_surname')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+
                     </div>
                     <div class="form-group  mt-3">
                         <label for="maternal_surname">Apellido materno*</label>
                         <input type="text" class="form-control custom-input-teacher" name="maternal_surname"
-                            id="maternal_surname" {{-- value="{{ $maternal_surname }}"  readonly  --}}>
+                            id="maternal_surname">
+
+                        @error('maternal_surname')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group  mt-3">
-                        <label for="date_birthday">fecha de nacimiento</label>
+                        <label for="date_birthday">Fecha de nacimiento</label>
                         <input type="date" class="form-control custom-input-teacher" name="date_birthday"
                             id="">
 
+                        @error('date_birthday')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+
                         <div class="form-group  mt-3">
-                            <label for="email">correo</label>
+                            <label for="email">Correo</label>
                             <input type="email" class="form-control custom-input-teacher" name="email"
                                 id="email">
                         </div>
 
+                        @error('email')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+
                         <div class="form-group mt-3">
-                            <label for="email">Carrera</label>
+                            <label for="career">Carrera</label>
                             <select class="form-select form-select-lg mb-3 custom-input-teacher" name="career"
                                 id="career" aria-label="Large select example">
 
-                                <option selected value="Ingenieria en Software">Ingenieria en Software</option>
+                                <option selected>Selecciona tu carrera</option>
+                                <option  value="Ingenieria en Software">Ingenieria en Software</option>
                                 <option value="Ingenieria en informatica">Ingenieria en informatica</option>
                             </select>
 
+                            @error('career')
+                                <div class="alert alert-danger mt-3">{{ $message }}</div>
+                            @enderror
                         </div>
-
-                        {{-- <div class="form-group mt-3">
-                            <label for="">Carrera</label>
-                            <select name="" id="">
-                                <option value=""></option>
-                            </select>
-                        </div> --}}
 
                         <div class="form-group  mt-3">
                             <label for="phone_number">Numero de telefono</label>
                             <input type="text" class="form-control custom-input-teacher-md " name="phone_number"
-                                id="phone_number" </div>
+                                id="phone_number">
+
+                                @error('phone_number')
+                                <div class="alert alert-danger mt-3">{{ $message }}</div>
+                            @enderror
+
                             <div class="form-group  mt-3">
                                 <label for="age">Edad</label>
                                 <input type="number" class="form-control custom-input-teacher" name="age"
                                     id="age"
                                     onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))">
+
+                                @error('age')
+                                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group mt-3">
-                                <label for="sex">Sexo</label>
+                                <label for="sex">Genero</label>
                                 <select name="sex" class="form-select form-select-lg mb-3 custom-input-teacher"
                                     id="sex" aria-label="Large select example">
-                                    <option selected value="men">Hombre </option>
+                                    <option selected >Selecciona tu genero </option>
+                                    <option  value="men">Hombre </option>
                                     <option value="girl">Mujer</option>
                                 </select>
 
+                                @error('sex')
+                                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group  mt-3 mb-5">
-                                <label for="password">contraseña</label>
+                                <label for="password">Contraseña</label>
                                 <input type="password" name="password" min="8" max="20"
                                     class="custom-input-teacher form-control" id="">
+
+                                @error('password')
+                                    <div class="alert alert-danger mt-3">{{ $message }}</div>
+                                @enderror
                             </div>
-                            {{-- <button type="submit" class="btn  btn_hover btn-register-student btn-lg px-5 btnGran">
-                                {{ __('Iniciar sesión') }}
-                            </button> --}}
                             <div class="d-flex justify-content-center CustomTextColor mt-2 mb-4">
                                 <button type="button"
                                     class=" btn-height btn  btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor btn btn- "
                                     data-bs-toggle="modal" data-bs-target="#deseas-regresar">
                                     <i class="fas fa-arrow-left"></i> Regresar
                                 </button>
-                               
+
                                 <button type="submit"
-                                class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3"
-                                data-bs-toggle="modal" data-bs-target="#deseasGuardar">
-                                <i class="fa-regular fa-floppy-disk"></i> Guardar
+                                    class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3" ">
+                               Guardar
                             </button>
                             </div>
-
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

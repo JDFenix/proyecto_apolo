@@ -19,20 +19,22 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
+
+
 //views recovery password
-Route::get('/', function(){
+Route::get('/', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
 
-Route::get('/olvidar_contraseña', function(){
+Route::get('/olvidar_contraseña', function () {
     return view('auth.forgetPassword');
 })->name('forgetPassword')->middleware('guest');
 
-Route::get('/recuperar_contraseña', function(){
+Route::get('/recuperar_contraseña', function () {
     return view('auth.recoverPassword');
 })->name('recoverPassword')->middleware('guest');
 
-Route::get('/confirmacion_contraseña', function(){
+Route::get('/confirmacion_contraseña', function () {
     return view('auth.confirmPassword');
 })->name('confirmPassword')->middleware('guest');
 
@@ -40,12 +42,12 @@ Route::get('/confirmacion_contraseña', function(){
 
 
 //routes auth
-Route::post('/login',[AuthController::class, 'login'])->name('login.post');
-Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //register teacher
-Route::get('/cedula/validador',  function(){
+Route::get('/cedula/validador',  function () {
     return view('auth.licenseValidator');
 })->name('teacher.validator')->middleware('guest');
 
@@ -57,41 +59,41 @@ Route::post('/validar', [LicenseValidatorController::class, 'getLicense'])->name
 
 
 //student
-Route::get('/registro/estudiante',  function(){
+Route::get('/registro/estudiante',  function () {
     return view('student.register');
-})->name('student.register')->middleware('guest');
+})->name('student.register');
 
 
 
 
 //register and logout user
-Route::get('/register',[UserController::class, 'index']);
-Route::post('/registerUser',[UserController::class, 'store' ])->name('register');
+Route::get('/register', [UserController::class, 'index']);
+Route::post('/registerUser', [UserController::class, 'store'])->name('register');
 
 
 
 //user
-Route::get('/inicio',  function(){
+Route::get('/inicio',  function () {
     return view('user.index');
 })->name('home')->middleware('auth');
 
-route::get('/seleccionar/rol', function(){
+route::get('/seleccionar/rol', function () {
     return view('user.selectRol');
 })->name('user.selectRol')->middleware('guest');
 
-Route::get('/confirmacion',  function(){
+Route::get('/confirmacion',  function () {
     return view('user.confirmRegister');
 })->name('user.confirmRegister')->middleware('guest');
 
-Route::get('/perfil',  function(){
+Route::get('/perfil',  function () {
     return view('user.perfil');
 })->name('user.perfil')->middleware('auth');
 
-Route::get('/contacto',  function(){
+Route::get('/contacto',  function () {
     return view('user.contact');
 })->name('user.contact');
 
-Route::get('/modificar',  function(){
+Route::get('/modificar',  function () {
     return view('user.modify');
 })->name('user.modify');
 
@@ -99,10 +101,10 @@ Route::get('/modificar',  function(){
 
 
 //advisory
-Route::get('/crear-asesoria',  function(){
+Route::get('/crear-asesoria',  function () {
     return view('advisory.create');
 })->name('advisory.create')->middleware('auth');
 
-Route::get('/modificar-asesoria',  function(){
+Route::get('/modificar-asesoria',  function () {
     return view('advisory.modify');
 })->name('advisory.modify')->middleware('auth');

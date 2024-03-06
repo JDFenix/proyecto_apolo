@@ -2,37 +2,37 @@
 
 @section('content')
     <style>
-.color-letra {
-    color: #022D74;
-}
+        .color-letra {
+            color: #022D74;
+        }
 
-.texto {
-    font-style: Segoe UI;
-}
+        .texto {
+            font-style: Segoe UI;
+        }
 
-.btn-primary {
-    color: #FFFFFF;
-    background: #022D74;
-    border: 2px solid;
-    border-color: #022D74;
-    transition: all 1s ease;
-}
+        .btn-primary {
+            color: #FFFFFF;
+            background: #022D74;
+            border: 2px solid;
+            border-color: #022D74;
+            transition: all 1s ease;
+        }
 
-.btn-primary:hover {
-    color: #022D74;
-    background: #FFFFFF;
-    border-color: #022D74;
-}
+        .btn-primary:hover {
+            color: #022D74;
+            background: #FFFFFF;
+            border-color: #022D74;
+        }
 
-.btn-secondary {
-    background: #6C757D;
-}
+        .btn-secondary {
+            background: #6C757D;
+        }
 
-.btn-secondary:hover {
-    color: #6C757D;
-    background: #FFFFFF;
-    border-color: #6C757D;
-}
+        .btn-secondary:hover {
+            color: #6C757D;
+            background: #FFFFFF;
+            border-color: #6C757D;
+        }
 
         .custom-input-teacher-md {
             width: 110%;
@@ -107,18 +107,18 @@
 
                     <div class="d-flex justify-content-center CustomTextColor mt-2">
                         <button type="button"
-                        class=" btn-height btn  btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor btn btn- bi "
-                        data-bs-toggle="modal" data-bs-target="#deseas-regresar">
-                        <i class="fas fa-arrow-left"></i> Regresar
-                    </button>
-                     
-                        <a style="padding:1rem" href="{{ route('teacher.register') }}"
-                        class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3">
-                        Enviar
-                    </a>
+                            class=" btn-height btn  btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor btn btn- bi "
+                            data-bs-toggle="modal" data-bs-target="#deseas-regresar">
+                            <i class="fas fa-arrow-left"></i> Regresar
+                        </button>
+
+                        <button type="submit"
+                            class=" btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3 ">
+                            <i class="fas fa-arrow-left"></i> Validar
+                        </button>
                     </div>
 
-                    {{-- <button type="submit">VALIDAR</button> --}}
+
                 </form>
             </div>
         </div>
@@ -126,11 +126,11 @@
 
 
 
-    
 
 
-    <div class="modal fade" id="deseas-regresar" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" data-bs-backdrop="static">
+
+    <div class="modal fade" id="deseas-regresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
 
         <div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
             <div class="modal-content">
@@ -157,73 +157,71 @@
     </div>
 
 
-    
-<style>
-    .texto-azul {
-        font-style: Segoe UI;
-        color: #022D74;
-    }
 
-    .p {
-        Color: #000000
-    }
-</style>
-<div class="container-fluid">
+    <style>
+        .texto-azul {
+            font-style: Segoe UI;
+            color: #022D74;
+        }
 
-    <div class="row p-5 pb-2 bg-white texto-azul">
+        .p {
+            Color: #000000
+        }
+    </style>
+    <div class="container-fluid">
 
-        <div class="col-xs-12 col-md-6 col-lg-3">
-                <img src="{{ asset('images/logo_universidad.png') }}"  class="mb-2" width="160px" height="80px" src="./images/Logo horizontal.png"
-                alt="Logo">
-        </div>
+        <div class="row p-5 pb-2 bg-white texto-azul">
 
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <p class="h5 mb-4">Contáctanos</p>
-            <div class="mb-2">
-                <p class="bi bi-geo-alt-fill"><a class="text-secondary text-decoration-none"
-                        href="https://www.google.com/maps/place/Universidad+Politecnica+de+Tecamac/@19.7141488,-98.9807546,17z/data=!3m1!4b1!4m6!3m5!1s0x85d1ed2fa5d3a6c1:0x1f383377175dc58a!8m2!3d19.7141438!4d-98.9781797!16s%2Fg%2F1q69rxsk0?entry=ttu">
-                        Av. 5 de mayo, Tecámac Estado de México</a>
-                    <p />
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <img src="{{ asset('images/logo_universidad.png') }}" class="mb-2" width="160px" height="80px"
+                    src="./images/Logo horizontal.png" alt="Logo">
             </div>
-            <div class="mb-2">
-                <p class="bi bi-telephone-fill"> <a class="text-secondary text-decoration-none"
-                        href="tel:+55235235634">
-                        55235235634</a></p>
-            </div>
-            <div class="mb-2">
-                <p class="bi bi-envelope-fill"><a class="text-secondary text-decoration-none"
-                        href="https://mail.google.com/mail/?view=cm&fs=1&to=universidad@gmail.com">
-                        universidad@gmail.com</a></p>
-            </div>
-        </div>
 
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <p class="h5 mb-4">¿Neceitas ayuda?</p>
-            <div class="mb-2">
-                <p class="bi bi-info-circle-fill"><a class="text-secondary text-decoration-none"
-                        href="contacto.html"> Da
-                        click aquí</a></p>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h5 mb-4">Contáctanos</p>
+                <div class="mb-2">
+                    <p class="bi bi-geo-alt-fill"><a class="text-secondary text-decoration-none"
+                            href="https://www.google.com/maps/place/Universidad+Politecnica+de+Tecamac/@19.7141488,-98.9807546,17z/data=!3m1!4b1!4m6!3m5!1s0x85d1ed2fa5d3a6c1:0x1f383377175dc58a!8m2!3d19.7141438!4d-98.9781797!16s%2Fg%2F1q69rxsk0?entry=ttu">
+                            Av. 5 de mayo, Tecámac Estado de México</a>
+                        <p />
+                </div>
+                <div class="mb-2">
+                    <p class="bi bi-telephone-fill"> <a class="text-secondary text-decoration-none" href="tel:+55235235634">
+                            55235235634</a></p>
+                </div>
+                <div class="mb-2">
+                    <p class="bi bi-envelope-fill"><a class="text-secondary text-decoration-none"
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to=universidad@gmail.com">
+                            universidad@gmail.com</a></p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <p class="h5 mb-4">Síguenos</p>
-            <div class="mb-2">
-                <p class="bi bi-facebook"><a class="text-secondary text-decoration-none"
-                        href="https://www.facebook.com/"> Universidad Politécnica</a>
-                </p>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h5 mb-4">¿Neceitas ayuda?</p>
+                <div class="mb-2">
+                    <p class="bi bi-info-circle-fill"><a class="text-secondary text-decoration-none" href="contacto.html">
+                            Da
+                            click aquí</a></p>
+                </div>
             </div>
-            <div class="mb-2">
-                <p class="bi bi-instagram"><a class="text-secondary text-decoration-none"
-                        href="https://www.instagram.com/"> @laU_Politécnica</a>
-                </p>
-            </div>
-        </div>
 
-        <div class="col-xs-12 pt-3 border-top">
-            <p class="texto-azul text-center">Copyright - All rights reserved © 2024</p>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h5 mb-4">Síguenos</p>
+                <div class="mb-2">
+                    <p class="bi bi-facebook"><a class="text-secondary text-decoration-none"
+                            href="https://www.facebook.com/"> Universidad Politécnica</a>
+                    </p>
+                </div>
+                <div class="mb-2">
+                    <p class="bi bi-instagram"><a class="text-secondary text-decoration-none"
+                            href="https://www.instagram.com/"> @laU_Politécnica</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-xs-12 pt-3 border-top">
+                <p class="texto-azul text-center">Copyright - All rights reserved © 2024</p>
+            </div>
         </div>
     </div>
-</div>
 @endsection
-

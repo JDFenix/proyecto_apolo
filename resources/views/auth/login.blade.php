@@ -65,7 +65,7 @@
                         <button type="submit" class="btn btn-login btn_hover btn-lg px-5 btnGran">
                             {{ __('Iniciar sesión') }}
                         </button>
-                         {{-- <a style="width: 100%; margin-left:-0%" href="{{ route('user.index') }}"
+                        {{-- <a style="width: 100%; margin-left:-0%" href="{{ route('user.index') }}"
                             class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3">
                             Iniciar sesión
                         </a>  --}}
@@ -82,8 +82,7 @@
                             class="text-decoration-none CustomTextColor mt-3">¿Olvidaste tu
                             contraseña?</a>
                     </div>
-
-
+                  
                 </div>
             </div>
         </div>
