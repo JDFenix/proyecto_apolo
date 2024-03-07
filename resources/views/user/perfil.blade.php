@@ -79,29 +79,20 @@
         }
     </style>
     <div class="container mt-1">
-
         <div class="position-relative">
-            <div class="cover-photo mb-4"></div>
+            <img src="#" class="cover-photo mb-4" alt="">
+
             <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
-            <img src="https://via.placeholder.com/300" alt="Foto de perfil" class="profile-picture">
+            <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
         </div>
 
-        <!-- Nombre del alumno -->
-        @if (Auth::user()->rol == 'student')
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <h4 class="text-center profile-name">Nombre del alumno</h4>
-            </div>
-        </div>
-        @endif
 
-        @if (Auth::user()->rol == 'teacher')
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <h4 class="text-center profile-name">Nombre del maestro</h4>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h4 class="text-center profile-name">{{ __('roles.' . Auth::user()->rol) }} {{ Auth::user()->name }} {{ Auth::user()->paternal_surname }} {{ Auth::user()->maternal_surname }}</h4>
+                </div>
             </div>
-        </div>
-        @endif
+      
         <!-- Información del alumno -->
 
         <div class="row mt-3">
@@ -109,25 +100,31 @@
                 <div class="p-3">
                     <ul class="list-group list-group-flush">
                         @if (Auth::user()->rol == 'student')
-                            <li class="list-group-item"><strong>Matrícula: </strong>1322134389</li>
-                            <li class="list-group-item"><strong>Correo: </strong>estudiante@correo.com</li>
-                            <li class="list-group-item"><strong>Teléfono: </strong>1564981123</li>
-                            <li class="list-group-item"><strong>Carrera: </strong>Ingeniería en software</li>
-                            <li class="list-group-item"><strong>Sexo: </strong>Masculino</li>
-                            <li class="list-group-item"><strong>Rol: </strong>Estudiante</li>
-                            <li class="list-group-item"><strong>Grado: </strong>5to cuatrimestre</li>
+                            <li class="list-group-item"><strong>Matrícula: </strong>{{ Auth::user()->student->enrollment }}
+                            </li>
+                            <li class="list-group-item"><strong>Correo: </strong>{{ Auth::user()->email }}</li>
+                            <li class="list-group-item"><strong>Teléfono: </strong>{{ Auth::user()->phone_number }}</li>
+                            <li class="list-group-item"><strong>Carrera: </strong>{{ Auth::user()->student->career }}</li>
+                            <li class="list-group-item"><strong>Sexo: </strong>{{ __('sex.' . Auth::user()->sex) }}</li>
+                            <li class="list-group-item"><strong>Rol: </strong>{{ __('roles.' . Auth::user()->rol) }}</li>
+                            <li class="list-group-item"><strong>Grado: </strong>{{ Auth::user()->student->enrollment }}</li>
                         @endif
                         @if (Auth::user()->rol == 'teacher')
-                            <li class="list-group-item"><strong>Matrícula: </strong>1322134389</li>
-                            <li class="list-group-item"><strong>Correo: </strong>maestro@correo.com</li>
-                            <li class="list-group-item"><strong>Teléfono: </strong>1564981123</li>
-                            <li class="list-group-item"><strong>Materia que imparte: </strong>Programación orientada a
-                                objetos</li>
-                            <li class="list-group-item"><strong>Sexo: </strong>Masculino</li>
-                            <li class="list-group-item"><strong>Rol: </strong>Maestro</li>
+                            <li class="list-group-item"><strong>Matrícula: </strong>{{ Auth::user()->teacher->enrollment }}
+                            </li>
+                            <li class="list-group-item"><strong>Correo: </strong>{{ Auth::user()->email }}</li>
+                            <li class="list-group-item"><strong>Teléfono: </strong>{{ Auth::user()->phone_number }}</li>
+                            <li class="list-group-item"><strong>Titulo Profesional:
+                                </strong>{{ Auth::user()->teacher->professional_title }}</li>
+                            <li class="list-group-item"><strong>Materia que imparte:
+                                </strong>{{ Auth::user()->teacher->subjects_taught }}</li>
+                            <li class="list-group-item"><strong>Sexo: </strong>{{ __('sex.' . Auth::user()->sex) }}</li>
+                            <li class="list-group-item"><strong>Rol: </strong>{{ __('roles.' . Auth::user()->rol) }}</li>
                         @endif
                     </ul>
-                    <a class="btn btn-primary bi bi-pencil-square mt-2" href="{{route('user.modify')}}"> Editar perfil</a>
+
+                    <a class="btn btn-primary bi bi-pencil-square mt-2" href="{{ route('user.modify') }}"> Editar
+                        perfil</a>
                 </div>
             </div>
 
@@ -245,8 +242,8 @@
 
 
 
-    <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        data-bs-backdrop="static">
+    <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-bs-backdrop="static">
 
         <div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
             <div class="modal-content">

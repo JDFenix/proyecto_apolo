@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('rol')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('image_cover')->nullable();
             $table->string('name')->nullable();
             $table->string('paternal_surname',)->nullable();
             $table->string('maternal_surname',)->nullable();
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('token',255)->nullable();
+            $table->string('token', 255)->nullable();
             $table->string('refresh_token')->nullable();
             $table->rememberToken();
             $table->timestamps();

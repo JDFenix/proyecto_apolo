@@ -181,9 +181,9 @@
 
 
                         <div class="form-group mt-3">
-                            <label for="professional_title">Titulo Profesional*</label>
+                            <label for="professional_tittle">Titulo Profesional*</label>
                             <select class="form-select form-select-lg mb-3 custom-input-teacher"
-                                name="professional_title" id="professional_title" aria-label="Large select example">
+                                name="professional_tittle" id="professional_tittle" aria-label="Large select example">
 
                                 <option selected value="Ingeniero en sistemas">Ingeniero en sistemas</option>
                                 <option value="Ingeniero en Software">Ingeniero en Software</option>

@@ -10,9 +10,15 @@ class Teachers extends Model
     protected $fillable = [
         'users_id',
         'license',
-        'professional_title',
+        'enrollment',
+        'professional_tittle',
         'subjects_taught'
     ];
 
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
 }

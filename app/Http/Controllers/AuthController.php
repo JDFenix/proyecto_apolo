@@ -16,38 +16,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // $dataUser = $request->only('email', 'password');
-        // $dataUser['password'] = bcrypt($request->password);
-        // $rolUser = $request['rol'];
-
-        // $rolUser = $request['rol'];
-        // $rolUser = $rolUser == 'teacher' ? 'maestro' : ($rolUser == 'student' ? 'estudiante' : $rolUser);
-        // if (Auth::attempt($dataUser)) {
-        //     request()->session()->regenerate();
-
-        //     session(['rolUser' => $rolUser]);
-
-        //     return redirect()->route('home');
-        // } else {
-        //     return response()->json('credentials bad');
-        // }
-
-
-        $user = User::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
         $rolUser = $request['rol'];
         $rolUser = $rolUser == 'teacher' ? 'maestro' : ($rolUser == 'student' ? 'estudiante' : $rolUser);
-
-
-        if ($user && $request->password == $user->password) {
-            Auth::login($user);
+    
+        if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
-
             session(['rolUser' => $rolUser]);
             return redirect()->route('home');
         } else {
             return response()->json('credentials bad');
         }
     }
+    
 
     public function logout(Request $request)
     {

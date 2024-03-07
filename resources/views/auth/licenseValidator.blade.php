@@ -114,7 +114,7 @@
 
                         <button type="submit"
                             class=" btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3 ">
-                            <i class="fas fa-arrow-left"></i> Validar
+                            Validar
                         </button>
                     </div>
 

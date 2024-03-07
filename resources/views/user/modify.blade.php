@@ -94,7 +94,7 @@
         }
 
         .custom-input-sexo {
-            width: 10%;
+            width: 25%;
         }
 
         .custom-input-rol {
@@ -117,9 +117,9 @@
     <div class="container mt-1">
 
         <div class="position-relative">
-            <div class="cover-photo mb-4"></div>
+            <img src="{{ Auth::user()->image_cover }}" class="cover-photo mb-4" >
             <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
-            <img src="https://via.placeholder.com/300" alt="Foto de perfil" class="profile-picture">
+            <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
         </div>
 
         <!-- Nombre del alumno -->
@@ -141,16 +141,16 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" value="Nombre" disabled>
+                                <input type="text" class="form-control" id="nombre" value="{{ Auth::user()->email }}" disabled>
                             </div>
                             <div class="col">
                                 <label for="apellido-p">Apellido paterno:</label>
-                                <input type="text" class="form-control" id="apellido-p" value="Apellido paterno"
+                                <input type="text" class="form-control" id="apellido-p" value="{{ Auth::user()->paternal_username }}"
                                     disabled>
                             </div>
                             <div class="col">
                                 <label for="apellido-m">Apellido materno:</label>
-                                <input type="text" class="form-control" id="apellido-m" value="Apellido materno"
+                                <input type="text" class="form-control" id="apellido-m" value="{{ Auth::user()->maternal_username }}"
                                     disabled>
                             </div>
                         </div>
@@ -158,18 +158,18 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="carrera">Carrera:</label>
-                                <input type="text" class="form-control" id="carrera" value="Ingeniería en software"
+                                <input type="text" class="form-control" id="carrera" value="{{ Auth::user()->student->career }}"
                                     disabled>
                             </div>
 
                             <div class="col">
                                 <label for="correo">Correo:</label>
-                                <input type="email" class="form-control" id="correo" value="email@.com">
+                                <input type="email" class="form-control" id="correo" value="{{ Auth::user()->email }}">
                             </div>
 
                             <div class="col">
                                 <label for="telefono">Teléfono:</label>
-                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="###">
+                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="{{ Auth::user()->phone_number }}">
                             </div>
                         </div>
 
@@ -177,18 +177,18 @@
                             <div class="col mb-2">
                                 <label for="matricula">Matrícula:</label>
                                 <input type="text" class="form-control custom-input-matricula" id="matricula"
-                                    value="Matrícula" disabled>
+                                    value="{{ Auth::user()->student->enrollment }}" disabled>
                             </div>
 
                             <div class="col">
                                 <label for="grado">Grado:</label>
                                 <input type="text" class="form-control custom-input-grado" id="grado"
-                                    value="5to cuatrimestre" disabled>
+                                    value="" disabled>
                             </div>
 
                             <div class="col">
                                 <label for="rol">Rol:</label>
-                                <input type="text" class="form-control custom-input-rol" id="rol" value="Estudiante"
+                                <input type="text" class="form-control custom-input-rol" id="rol" value="{{ __('roles.' . Auth::user()->rol) }}"
                                     disabled>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="sexo">Sexo:</label>
-                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="Sexo"
+                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="{{ __('sex.' . Auth::user()->sex) }}"
                                     disabled>
                             </div>
                         </div>
@@ -205,16 +205,16 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" value="Nombre" disabled>
+                                <input type="text" class="form-control" id="nombre" value="{{ Auth::user()->name }}" disabled>
                             </div>
                             <div class="col">
                                 <label for="apellido-p">Apellido paterno:</label>
-                                <input type="text" class="form-control" id="apellido-p" value="Apellido paterno"
+                                <input type="text" class="form-control" id="apellido-p" value="{{ Auth::user()->paternal_surname }}"
                                     disabled>
                             </div>
                             <div class="col">
                                 <label for="apellido-m">Apellido materno:</label>
-                                <input type="text" class="form-control" id="apellido-m" value="Apellido materno"
+                                <input type="text" class="form-control" id="apellido-m" value="{{ Auth::user()->maternal_surname }}"
                                     disabled>
                             </div>
                         </div>
@@ -222,18 +222,18 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="carrera">Título profesional:</label>
-                                <input type="text" class="form-control" id="carrera" value="Ingeniero en software"
+                                <input type="text" class="form-control" id="carrera" value="{{ Auth::user()->teacher->professional_title }}"
                                     disabled>
                             </div>
 
                             <div class="col">
                                 <label for="correo">Correo:</label>
-                                <input type="email" class="form-control" id="correo" value="email@.com">
+                                <input type="email" class="form-control" id="correo" value="{{ Auth::user()->email }}">
                             </div>
 
                             <div class="col">
                                 <label for="telefono">Teléfono:</label>
-                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="###">
+                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="{{ Auth::user()->phone_number }}">
                             </div>
                         </div>
 
@@ -241,18 +241,18 @@
                             <div class="col mb-2">
                                 <label for="grado">Materia que imparte:</label>
                                 <input type="text" class="form-control custom-input-materia" id="grado"
-                                    value="Programación">
+                                    value="{{ Auth::user()->teacher->subjects_taught }}">
                             </div>
 
                             <div class="col">
                                 <label for="matricula">Matrícula:</label>
                                 <input type="text" class="form-control custom-input-matricula" id="matricula"
-                                    value="Matrícula" disabled>
+                                    value="{{ Auth::user()->teacher->enrollment }}" disabled>
                             </div>
 
                             <div class="col">
                                 <label for="rol">Rol:</label>
-                                <input type="text" class="form-control custom-input-rol" id="rol" value="Maestro"
+                                <input type="text" class="form-control custom-input-rol" id="rol" value="{{ __('roles.' . Auth::user()->rol) }}"
                                     disabled>
                             </div>
                         </div>
@@ -260,13 +260,13 @@
                         <div class="form-group row">
                             <div class="col mb-2">
                                 <label for="sexo">Sexo:</label>
-                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="Sexo"
+                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="{{ __('sex.' . Auth::user()->sex) }}"
                                     disabled>
                             </div>
 
                             <div class="col mb-2">
                                 <label for="sexo">Cédula profesional:</label>
-                                <input type="text" class="form-control custom-input-cedula" id="sexo" value="Cédula"
+                                <input type="text" class="form-control custom-input-cedula" id="sexo" value="{{ Auth::user()->teacher->license }}"
                                     disabled>
                             </div>
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('users_id');
             $table->string('license')->nullable();
             $table->string('enrollment');
-            $table->string('professional_title');
+            $table->string('professional_tittle');
             $table->string('subjects_taught');
             $table->foreign('users_id')->references('id')->on('users');
             $table->timestamps();
