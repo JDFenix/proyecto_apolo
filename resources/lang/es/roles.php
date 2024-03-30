@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'student' => 'ESTUDIANTE',
-    'teacher' => 'MAESTRO',
-    'administrator' => 'ADMINISTRADOR',
+    'student' => 'Estudiante',
+    'teacher' => 'Maestro',
+    'administrator' => 'Administrador',
 ];

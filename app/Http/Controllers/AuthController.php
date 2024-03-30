@@ -19,16 +19,17 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $rolUser = $request['rol'];
         $rolUser = $rolUser == 'teacher' ? 'maestro' : ($rolUser == 'student' ? 'estudiante' : $rolUser);
-    
+
         if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
             session(['rolUser' => $rolUser]);
-            return redirect()->route('home');
+
+            return  redirect()->route('home');
         } else {
             return response()->json('credentials bad');
         }
     }
-    
+
 
     public function logout(Request $request)
     {

@@ -15,7 +15,7 @@
 
 <body class="">
 
-    
+
     <nav class="navbar navbar-expand-lg navbar-white bg-white border-bottom">
         @auth
             <a class="navbar-brand" href="{{ route('home') }}">
@@ -31,12 +31,43 @@
             </a>
         @endguest
         @Auth
-            <form class="form-inline my-2 my-lg-0 mx-auto position-relative" style="left: 25%">
-                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar"
+
+
+            <form id="search-form" class="form-inline my-2 my-lg-0 mx-auto position-relative" style="left: 25%"
+                action="{{ route('search') }}" method="GET">
+                @csrf
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar"
                     style="width: 190%;background-color: #EBEBED; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);">
-                <span class="fa fa-search form-control-feedback position-absolute"
-                    style="right: 10px; top: 12px;left:175%"></span>
+                <button type="submit" style="background: none; border:none">
+                    <span class="fa fa-search form-control-feedback position-absolute"
+                        style="right: 10px; top: 12px;left:175%"></span>
+                </button>
             </form>
+
+            <div id="search-results">
+                <!-- Los resultados de la búsqueda se insertarán aquí -->
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                function performSearch() {
+                    $.ajax({
+                        url: $('#search-form').attr('action'),
+                        method: 'GET',
+                        data: $('#search-form').serialize(),
+                        success: function(data) {
+                            var html = '';
+                            for (var i = 0; i < data.users.length; i++) {
+                                html += '<p>' + data.users[i].name + '</p>';
+                            }
+                            $('#search-results').html(html);
+                        }
+                    });
+                }
+            </script>
+
+
+
         @endauth
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
@@ -61,13 +92,18 @@
                                 <ul class="dropdown-menu" style="margin-left: 45%">
 
                                     <li>
-                                        <a class=" dropdown-item nav-item nav-link" href="{{ route('user.perfil') }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                                            </svg> {{ __('Perfil') }}
-                                        </a>
+                                        <form action="{{ route('user.perfil', ['id' => Auth::user()->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item nav-item nav-link">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                    fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                                                </svg> {{ __('Perfil') }}
+                                            </button>
+                                        </form>
+
                                     </li>
 
                                     @if (Auth::user()->rol == 'teacher')
@@ -91,7 +127,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item nav-item nav-link" href="{{route('user.contact')}}">
+                                        <a class="dropdown-item nav-item nav-link" href="{{ route('user.contact') }}">
                                             <i class='fas fa-question-circle'></i>{{ __(' Ayuda') }}
                                         </a>
                                     </li>
@@ -102,7 +138,7 @@
 
                         @endguest
                         @guest
-                            <a class="nav-item nav-link" href="{{route('user.contact')}}">¿Necesitas ayuda?</a>
+                            <a class="nav-item nav-link" href="{{ route('user.contact') }}">¿Necesitas ayuda?</a>
                         @endguest
                     </div>
                 </div>
@@ -117,6 +153,8 @@
     </main>
 
 
+
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -126,6 +164,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
     </script>
+
 
     <script src="{{ mix('resources/js/app.js') }}" type="module"></script>
 

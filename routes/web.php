@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvisoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LicenseValidatorController;
 use App\Http\Controllers\UserController;
@@ -73,9 +74,7 @@ Route::post('/registerUser', [UserController::class, 'store'])->name('register')
 
 
 //user
-Route::get('/inicio',  function () {
-    return view('user.index');
-})->name('home')->middleware('auth');
+Route::get('/inicio', [AdvisoryController::class, 'index'])->name('home')->middleware('auth');
 
 route::get('/seleccionar/rol', function () {
     return view('user.selectRol');
@@ -85,9 +84,14 @@ Route::get('/confirmacion',  function () {
     return view('user.confirmRegister');
 })->name('user.confirmRegister')->middleware('guest');
 
-Route::get('/perfil',  function () {
-    return view('user.perfil');
-})->name('user.perfil')->middleware('auth');
+
+Route::post('/perfil/{id}', [UserController::class, 'showPerfil'])->name('user.perfil');
+Route::patch('/actualizar/{id}', [UserController::class, 'update'])->name('user.update.post');
+
+
+Route::post('/buscar/usuario', [UserController::class, 'show'])->name('search.post')->middleware('auth');
+
+
 
 Route::get('/contacto',  function () {
     return view('user.contact');
@@ -100,11 +104,26 @@ Route::get('/modificar',  function () {
 
 
 
+
 //advisory
 Route::get('/crear-asesoria',  function () {
     return view('advisory.create');
 })->name('advisory.create')->middleware('auth');
 
+Route::post('/crear/asesoria', [AdvisoryController::class, 'store'])->name('advisory.post');
+
+
 Route::get('/modificar-asesoria',  function () {
     return view('advisory.modify');
 })->name('advisory.modify')->middleware('auth');
+
+
+Route::get('/Buscar',  function () {
+    return view('user.search');
+})->name('user.search')->middleware('auth');
+
+Route::get('/search', [UserController::class, 'search'])->name('search');
+
+Route::get('/perfil/{id}', [UserController::class, 'showExternalPerfil'])->name('user.externalPerfil');
+
+Route::post('seguir-usuario/{studentId}/{teacherId}',[UserController::class, 'followUser'])->name('followUser');

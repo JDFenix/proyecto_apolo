@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advisory', function (Blueprint $table) {
+        Schema::create('advisories', function (Blueprint $table) {
             $table->id();
             $table->string('tittle')->nullable();
             $table->string('status')->nullable();
+            $table->string('subject')->nullable();
             $table->date('date');
             $table->time('time');
             $table->foreignId('teachers_id');

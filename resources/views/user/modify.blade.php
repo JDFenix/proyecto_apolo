@@ -117,7 +117,7 @@
     <div class="container mt-1">
 
         <div class="position-relative">
-            <img src="{{ Auth::user()->image_cover }}" class="cover-photo mb-4" >
+            <img src="{{ Auth::user()->image_cover }}" class="cover-photo mb-4">
             <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
             <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
         </div>
@@ -135,153 +135,165 @@
         <div class="row mt-3">
             <div class="col-md-40">
                 <div class="p-3">
-                    <form>
-                        
+                    <form action="{{ route('user.update.post', Auth::user()->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                  
+                        <input type="text" value="{{ Auth::user()->rol }}" name="rol" hidden>
+
                         @if (Auth::user()->rol == 'student')
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" value="{{ Auth::user()->email }}" disabled>
-                            </div>
-                            <div class="col">
-                                <label for="apellido-p">Apellido paterno:</label>
-                                <input type="text" class="form-control" id="apellido-p" value="{{ Auth::user()->paternal_username }}"
-                                    disabled>
-                            </div>
-                            <div class="col">
-                                <label for="apellido-m">Apellido materno:</label>
-                                <input type="text" class="form-control" id="apellido-m" value="{{ Auth::user()->maternal_username }}"
-                                    disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="carrera">Carrera:</label>
-                                <input type="text" class="form-control" id="carrera" value="{{ Auth::user()->student->career }}"
-                                    disabled>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre"
+                                        value="{{ Auth::user()->email }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="apellido-p">Apellido paterno:</label>
+                                    <input type="text" class="form-control" id="apellido-p"
+                                        value="{{ Auth::user()->paternal_username }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="apellido-m">Apellido materno:</label>
+                                    <input type="text" class="form-control" id="apellido-m"
+                                        value="{{ Auth::user()->maternal_username }}" disabled>
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <label for="correo">Correo:</label>
-                                <input type="email" class="form-control" id="correo" value="{{ Auth::user()->email }}">
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="carrera">Carrera:</label>
+                                    <input type="text" class="form-control" id="carrera"
+                                        value="{{ Auth::user()->student->career }}" disabled>
+                                </div>
+
+                                <div class="col">
+                                    <label for="correo">Correo:</label>
+                                    <input type="email" class="form-control" name="email" id="correo"
+                                        value="{{ Auth::user()->email }}">
+                                </div>
+
+                                <div class="col">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="tel" name="phone_number" class="form-control custom-input-telefono"
+                                        id="telefono" value="{{ Auth::user()->phone_number }}">
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <label for="telefono">Teléfono:</label>
-                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="{{ Auth::user()->phone_number }}">
-                            </div>
-                        </div>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="matricula">Matrícula:</label>
+                                    <input type="text" class="form-control custom-input-matricula" id="matricula"
+                                        value="{{ Auth::user()->student->enrollment }}" disabled>
+                                </div>
 
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="matricula">Matrícula:</label>
-                                <input type="text" class="form-control custom-input-matricula" id="matricula"
-                                    value="{{ Auth::user()->student->enrollment }}" disabled>
+                                <div class="col">
+                                    <label for="grado" hidden>Grado:</label>
+                                    <input type="text" class="form-control custom-input-grado" id="grado"
+                                        value="" hidden disabled>
+                                </div>
+
+                                <div class="col">
+                                    <label for="rol">Rol:</label>
+                                    <input type="text" class="form-control custom-input-rol" id="rol"
+                                        value="{{ __('roles.' . Auth::user()->rol) }}" disabled>
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <label for="grado">Grado:</label>
-                                <input type="text" class="form-control custom-input-grado" id="grado"
-                                    value="" disabled>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="sexo">Sexo:</label>
+                                    <input type="text" class="form-control custom-input-sexo" id="sexo"
+                                        value="{{ __('sex.' . Auth::user()->sex) }}" disabled>
+                                </div>
                             </div>
-
-                            <div class="col">
-                                <label for="rol">Rol:</label>
-                                <input type="text" class="form-control custom-input-rol" id="rol" value="{{ __('roles.' . Auth::user()->rol) }}"
-                                    disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="sexo">Sexo:</label>
-                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="{{ __('sex.' . Auth::user()->sex) }}"
-                                    disabled>
-                            </div>
-                        </div>
-
                         @else
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" value="{{ Auth::user()->name }}" disabled>
-                            </div>
-                            <div class="col">
-                                <label for="apellido-p">Apellido paterno:</label>
-                                <input type="text" class="form-control" id="apellido-p" value="{{ Auth::user()->paternal_surname }}"
-                                    disabled>
-                            </div>
-                            <div class="col">
-                                <label for="apellido-m">Apellido materno:</label>
-                                <input type="text" class="form-control" id="apellido-m" value="{{ Auth::user()->maternal_surname }}"
-                                    disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="carrera">Título profesional:</label>
-                                <input type="text" class="form-control" id="carrera" value="{{ Auth::user()->teacher->professional_title }}"
-                                    disabled>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre"
+                                        value="{{ Auth::user()->name }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="apellido-p">Apellido paterno:</label>
+                                    <input type="text" class="form-control" id="apellido-p"
+                                        value="{{ Auth::user()->paternal_surname }}" disabled>
+                                </div>
+                                <div class="col">
+                                    <label for="apellido-m">Apellido materno:</label>
+                                    <input type="text" class="form-control" id="apellido-m"
+                                        value="{{ Auth::user()->maternal_surname }}" disabled>
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <label for="correo">Correo:</label>
-                                <input type="email" class="form-control" id="correo" value="{{ Auth::user()->email }}">
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="carrera">Título profesional:</label>
+                                    <input type="text" class="form-control" id="carrera"
+                                        value="{{ Auth::user()->teacher->professional_title }}" disabled>
+                                </div>
+
+                                <div class="col">
+                                    <label for="correo">Correo:</label>
+                                    <input type="email" name="email" class="form-control" id="correo"
+                                        value="{{ Auth::user()->email }}">
+                                </div>
+
+                                <div class="col">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="tel" name="phone_number" class="form-control custom-input-telefono"
+                                        id="telefono" value="{{ Auth::user()->phone_number }}">
+                                </div>
                             </div>
 
-                            <div class="col">
-                                <label for="telefono">Teléfono:</label>
-                                <input type="tel" class="form-control custom-input-telefono" id="telefono" value="{{ Auth::user()->phone_number }}">
-                            </div>
-                        </div>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="grado">Materia que imparte:</label>
+                                    <input type="text" name="subjects_taught"
+                                        class="form-control custom-input-materia" id="grado"
+                                        value="{{ Auth::user()->teacher->subjects_taught }}">
+                                </div>
 
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="grado">Materia que imparte:</label>
-                                <input type="text" class="form-control custom-input-materia" id="grado"
-                                    value="{{ Auth::user()->teacher->subjects_taught }}">
-                            </div>
+                                <div class="col">
+                                    <label for="matricula">Matrícula:</label>
+                                    <input type="text" class="form-control custom-input-matricula" id="matricula"
+                                        value="{{ Auth::user()->teacher->enrollment }}" disabled>
+                                </div>
 
-                            <div class="col">
-                                <label for="matricula">Matrícula:</label>
-                                <input type="text" class="form-control custom-input-matricula" id="matricula"
-                                    value="{{ Auth::user()->teacher->enrollment }}" disabled>
-                            </div>
-
-                            <div class="col">
-                                <label for="rol">Rol:</label>
-                                <input type="text" class="form-control custom-input-rol" id="rol" value="{{ __('roles.' . Auth::user()->rol) }}"
-                                    disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col mb-2">
-                                <label for="sexo">Sexo:</label>
-                                <input type="text" class="form-control custom-input-sexo" id="sexo" value="{{ __('sex.' . Auth::user()->sex) }}"
-                                    disabled>
+                                <div class="col">
+                                    <label for="rol">Rol:</label>
+                                    <input type="text" class="form-control custom-input-rol" id="rol"
+                                        value="{{ __('roles.' . Auth::user()->rol) }}" disabled>
+                                </div>
                             </div>
 
-                            <div class="col mb-2">
-                                <label for="sexo">Cédula profesional:</label>
-                                <input type="text" class="form-control custom-input-cedula" id="sexo" value="{{ Auth::user()->teacher->license }}"
-                                    disabled>
+                            <div class="form-group row">
+                                <div class="col mb-2">
+                                    <label for="sexo">Sexo:</label>
+                                    <input type="text" class="form-control custom-input-sexo" id="sexo"
+                                        value="{{ __('sex.' . Auth::user()->sex) }}" disabled>
+                                </div>
+
+                                <div class="col mb-2">
+                                    <label for="sexo">Cédula profesional:</label>
+                                    <input type="text" class="form-control custom-input-cedula" id="sexo"
+                                        value="{{ Auth::user()->teacher->license }}" disabled>
+                                </div>
+
+
+                                <div class="col mb-2">
+                                </div>
                             </div>
-
-
-                            <div class="col mb-2">
-                            </div>
-                        </div>
-
                         @endif
 
+                        
                         <button type="button" class="btn btn-secondary bi bi-arrow-left mt-2 mr-2"
                             data-bs-toggle="modal" data-bs-target="#deseas-regresar"> Cancelar </button>
 
                         <button type="button" class="btn btn-primary bi bi-floppy mt-2" data-bs-toggle="modal"
                             data-bs-target="#deseasGuardar"> Guardar </button>
+
+                        <button type="submit" hidden id="confirm-form"></button>
                     </form>
                 </div>
             </div>
@@ -311,7 +323,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary"
-                        onclick="window.location.href='/perfil'">Guardar</button>
+                        onclick="document.getElementById('confirm-form').click()">Guardar</button>
                 </div>
 
             </div>
@@ -339,8 +351,13 @@
                 <!-- Footer del modal-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="window.location.href='/perfil'">Abandonar</button>
+
+                    <form action="{{ route('user.perfil', ['id' => Auth::user()->id]) }}"
+                        method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Abandonar</button>
+                    </form>
+                  
                 </div>
 
             </div>

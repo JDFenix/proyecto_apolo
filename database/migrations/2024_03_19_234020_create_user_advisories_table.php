@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_advisories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('students_id');
-            $table->foreignId('advisory_id');
             
-            $table->foreign('students_id')->references('id')->on('students');
-            $table->foreign('advisory_id')->references('id')->on('advisory');
+            $table->foreignId('student_id');
+            $table->foreignId('advisory_id');
+
+            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('advisory_id')->references('id')->on('advisories');
             $table->timestamps();
         });
     }

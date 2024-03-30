@@ -20,4 +20,9 @@ class Students extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function user_advisory()
+    {
+        return $this->hasMany(user_advisories::class, 'student_id');
+    }
 }

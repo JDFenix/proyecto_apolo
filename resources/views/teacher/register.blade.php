@@ -333,7 +333,7 @@
             </div>
 
             <div class="col-xs-12 col-md-6 col-lg-3">
-                <p class="h5 mb-4">¿Nececitas ayuda?</p>
+                <p class="h5 mb-4">¿Necesitas ayuda?</p>
                 <div class="mb-2">
                     <p class="bi bi-info-circle-fill"><a class="text-secondary text-decoration-none"
                             href="{{ route('user.contact') }}"> Da

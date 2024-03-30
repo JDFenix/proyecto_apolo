@@ -144,7 +144,7 @@
                 </div>
     </nav>
 
- 
+
 
     <div class="container">
         <div class="row justify-content-center">
@@ -207,7 +207,7 @@
                                 id="career" aria-label="Large select example">
 
                                 <option selected>Selecciona tu carrera</option>
-                                <option  value="Ingenieria en Software">Ingenieria en Software</option>
+                                <option value="Ingenieria en Software">Ingenieria en Software</option>
                                 <option value="Ingenieria en informatica">Ingenieria en informatica</option>
                             </select>
 
@@ -221,7 +221,7 @@
                             <input type="text" class="form-control custom-input-teacher-md " name="phone_number"
                                 id="phone_number">
 
-                                @error('phone_number')
+                            @error('phone_number')
                                 <div class="alert alert-danger mt-3">{{ $message }}</div>
                             @enderror
 
@@ -240,8 +240,8 @@
                                 <label for="sex">Genero</label>
                                 <select name="sex" class="form-select form-select-lg mb-3 custom-input-teacher"
                                     id="sex" aria-label="Large select example">
-                                    <option selected >Selecciona tu genero </option>
-                                    <option  value="men">Hombre </option>
+                                    <option selected>Selecciona tu genero </option>
+                                    <option value="men">Hombre </option>
                                     <option value="girl">Mujer</option>
                                 </select>
 
@@ -348,7 +348,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-3">
-            <p class="h5 mb-4">¿Nececitas ayuda?</p>
+            <p class="h5 mb-4">¿Nesecitas ayuda?</p>
             <div class="mb-2">
                 <p class="bi bi-info-circle-fill"><a class="text-secondary text-decoration-none"
                         href="{{ route('user.contact') }}"> Da

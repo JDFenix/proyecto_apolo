@@ -87,12 +87,13 @@
         </div>
 
 
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <h4 class="text-center profile-name">{{ __('roles.' . Auth::user()->rol) }} {{ Auth::user()->name }} {{ Auth::user()->paternal_surname }} {{ Auth::user()->maternal_surname }}</h4>
-                </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <h4 class="text-center profile-name">{{ __('roles.' . Auth::user()->rol) }} {{ Auth::user()->name }}
+                    {{ Auth::user()->paternal_surname }} {{ Auth::user()->maternal_surname }}</h4>
             </div>
-      
+        </div>
+
         <!-- Información del alumno -->
 
         <div class="row mt-3">
@@ -107,7 +108,8 @@
                             <li class="list-group-item"><strong>Carrera: </strong>{{ Auth::user()->student->career }}</li>
                             <li class="list-group-item"><strong>Sexo: </strong>{{ __('sex.' . Auth::user()->sex) }}</li>
                             <li class="list-group-item"><strong>Rol: </strong>{{ __('roles.' . Auth::user()->rol) }}</li>
-                            <li class="list-group-item"><strong>Grado: </strong>{{ Auth::user()->student->enrollment }}</li>
+                        
+                            </li>
                         @endif
                         @if (Auth::user()->rol == 'teacher')
                             <li class="list-group-item"><strong>Matrícula: </strong>{{ Auth::user()->teacher->enrollment }}
@@ -115,7 +117,7 @@
                             <li class="list-group-item"><strong>Correo: </strong>{{ Auth::user()->email }}</li>
                             <li class="list-group-item"><strong>Teléfono: </strong>{{ Auth::user()->phone_number }}</li>
                             <li class="list-group-item"><strong>Titulo Profesional:
-                                </strong>{{ Auth::user()->teacher->professional_title }}</li>
+                                </strong>{{ Auth::user()->teacher->professional_tittle }}</li>
                             <li class="list-group-item"><strong>Materia que imparte:
                                 </strong>{{ Auth::user()->teacher->subjects_taught }}</li>
                             <li class="list-group-item"><strong>Sexo: </strong>{{ __('sex.' . Auth::user()->sex) }}</li>
@@ -188,52 +190,23 @@
             @endif
 
             @if (Auth::user()->rol == 'teacher')
-                <div class="col-md-8">
-                    <h5 class="mt-4">Asesorías impartidas</h5>
-                    <div class="list-group mb-4">
-                        <a href="#" class="list-group-item list-group-item-primary active" aria-current="true">
+            <div class="col-md-8">
+                <h5 class="mt-4">Asesorías impartidas</h5>
+                <div class="list-group mb-4">
+                    @foreach ($advisories as $advisory)
+                    <a href="#" class="list-group-item list-group-item-primary active mt-1" aria-current="true">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small>Fecha y hora</small>
+                                <h5 class="mb-1">{{ $advisory->tittle }}</h5>
+                                <small>{{ $advisory->date }} {{ $advisory->time }}</small>
                             </div>
-                            {{-- <p class="mb-1">Salón de la asesoría</p> --}}
-                            <small>Materia</small>
+                            <small>{{ $advisory->subject }}</small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small class="text-body-secondary">Fecha y hora</small>
-                            </div>
-                            {{-- <p class="mb-1">Salón de la asesoría</p> --}}
-                            <small class="text-body-secondary">Materia</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small class="text-body-secondary">Fecha y hora</small>
-                            </div>
-                            <p class="mb-1">HSalón de la asesoría</p>
-                            <small class="text-body-secondary">Materia</small>
-                        </a>
-                    </div>
-
-                    <!-- Barra de paginación -->
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <span class="page-link">Anterior</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">2</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-            @endif
+                    @endforeach
+                </div>
+                {{-- {{ $advisories->links() }} --}}
+            </div>
+        @endif
+        
 
 
         </div>
@@ -242,8 +215,8 @@
 
 
 
-    <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
 
         <div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
             <div class="modal-content">

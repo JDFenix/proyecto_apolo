@@ -14,7 +14,6 @@
 
 <body class="">
 
-
     <div class="container-fluid">
         <div class="row">
             <!-- A la izquierda se encuentra una imagen -->
@@ -82,11 +81,13 @@
                             class="text-decoration-none CustomTextColor mt-3">¿Olvidaste tu
                             contraseña?</a>
                     </div>
-                  
+
                 </div>
             </div>
         </div>
     </div>
+   
+
 </body>
 
 </html>

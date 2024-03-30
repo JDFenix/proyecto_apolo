@@ -17,8 +17,12 @@ class Teachers extends Model
 
     use HasFactory;
 
-    public function user()
+  
+    public function advisories()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->hasMany(Advisory::class, 'teachers_id');
     }
+
+        
+    
 }
