@@ -84,6 +84,7 @@
                 <h1 class="text-center CustomTextColor ">Agregar nueva asesoría</h1>
                 <form action="{{ route('advisory.post') }}" method="post" enctype="multipart/form-data" class="mx-auto">
                     @csrf
+                    {{ Auth::user()->id }}
                     <input type="text" hidden value="Activa" name="status">
                     <input type="text" hidden value="{{ Auth::user()->id }}" name="teachers_id">
                 
