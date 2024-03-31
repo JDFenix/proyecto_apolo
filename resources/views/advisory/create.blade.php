@@ -85,9 +85,8 @@
                 <form action="{{ route('advisory.post') }}" method="post" enctype="multipart/form-data" class="mx-auto">
                     @csrf
                     <input type="text" hidden value="Activa" name="status">
-                    <input type="number" hidden value="{{ Auth::user()->id }}" name="teachers_id">
-                    {{ Auth::user()->id }}
-                    
+                    <input type="text" hidden value="{{ Auth::user()->id }}" name="teachers_id">
+                
                     <div style="margin-left:15%">
                         <div class="form-group mt-5">
                             <label for="date">Fecha*</label>

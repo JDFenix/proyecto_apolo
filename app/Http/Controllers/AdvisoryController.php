@@ -51,7 +51,7 @@ class AdvisoryController extends Controller
         $user_id = $user->id;
 
         if ($userRol == 'teacher') {
-            $advisory = Advisory::where('teachers_id', $user_id)->get();
+            $advisories = Advisory::where('teachers_id', $user_id)->get();
         } elseif ($userRol == 'student') {
             $userTeacherRecords = User_Teacher::where('users_id', $user_id)->get();
             $advisories = collect();
@@ -76,9 +76,11 @@ class AdvisoryController extends Controller
 
     public function store(StoreAdvisoryRequest $request)
     {
+        
         $advisory = $request->validated();
-        $userCreated = Advisory::create($advisory);
+        $advisorycreated = Advisory::create($advisory);
 
+      
         return redirect()->route('home');
     }
 }
