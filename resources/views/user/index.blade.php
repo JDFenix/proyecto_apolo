@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 {{-- <i class="bi bi-patch-plus-fill"></i> --}}
-                @if ($advisory->isNotEmpty())
+                @if ($advisories->isNotEmpty())
                     @php
-                        $sortedAdvisories = $advisory->sortBy(function ($item, $key) {
+                        $sortedAdvisories = $advisories->sortBy(function ($item, $key) {
                             return Carbon\Carbon::parse($item->date . ' ' . $item->time);
                         });
 
@@ -39,10 +39,15 @@
                                         <h6 class="mb-2" style="position: absolute; margin-left:90%; margin-top:-2%">
                                             {{ $Oneadvisory->status }}
                                         </h6>
-                                        <a href="#" style="background-color: #022D74"
-                                            class="btn btn-primary rounded-pill mt-5 px-5 py-2">
-                                            Inscribir
-                                        </a>
+                                        <form action="{{ route('subscribe.advisory', ['studentId' => Auth::user()->id, 'advisoryId' => $Oneadvisory->id]) }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="subscribe_token" value="{{ Session::get('subscribe_token') }}">
+                                            <button type="submit" class="btn btn-primary btn-custom rounded-pill mt-5 px-5 py-2">
+                                                {{ $Oneadvisory->isSubscribed ? 'Desuscribir' : 'Inscribir' }}
+                                            </button>
+                                        </form>
+                                        
+                                        
                                     @else
                                         <h6 class="mb-2" style="position: absolute; margin-left:90%; margin-top:-2%">
                                             {{ $Oneadvisory->status }}

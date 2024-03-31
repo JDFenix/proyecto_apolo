@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdvisoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LicenseValidatorController;
+use App\Http\Controllers\UserAdvisoriesController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -101,6 +102,16 @@ Route::get('/modificar',  function () {
     return view('user.modify');
 })->name('user.modify');
 
+Route::get('/Buscar',  function () {
+    return view('user.search');
+})->name('user.search')->middleware('auth');
+
+Route::get('/search', [UserController::class, 'search'])->name('search');
+
+Route::get('/perfil/{id}', [UserController::class, 'showExternalPerfil'])->name('user.externalPerfil');
+
+Route::post('seguir-usuario/{studentId}/{teacherId}',[UserController::class, 'followUser'])->name('followUser');
+
 
 
 
@@ -118,12 +129,4 @@ Route::get('/modificar-asesoria',  function () {
 })->name('advisory.modify')->middleware('auth');
 
 
-Route::get('/Buscar',  function () {
-    return view('user.search');
-})->name('user.search')->middleware('auth');
-
-Route::get('/search', [UserController::class, 'search'])->name('search');
-
-Route::get('/perfil/{id}', [UserController::class, 'showExternalPerfil'])->name('user.externalPerfil');
-
-Route::post('seguir-usuario/{studentId}/{teacherId}',[UserController::class, 'followUser'])->name('followUser');
+Route::post('subscribir-asesoria/{studentId}/{advisoryId}', [AdvisoryController::class,'subscribeAdvisory'])->name('subscribe.advisory');

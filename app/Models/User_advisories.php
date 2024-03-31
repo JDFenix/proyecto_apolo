@@ -9,6 +9,10 @@ class User_advisories extends Model
 {
     use HasFactory;
 
+    protected $fillable= [
+        'advisory_id',
+        'student_id'
+    ];
 
     public function student()
     {
