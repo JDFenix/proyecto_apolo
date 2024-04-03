@@ -87,12 +87,13 @@ Route::get('/confirmacion',  function () {
 
 
 Route::post('/perfil/{id}', [UserController::class, 'showPerfil'])->name('user.perfil');
-Route::patch('/actualizar/{id}', [UserController::class, 'update'])->name('user.update.post');
+
 
 
 Route::post('/buscar/usuario', [UserController::class, 'show'])->name('search.post')->middleware('auth');
 
 
+Route::patch('actualizar-asesoria/{id}', [AdvisoryController::class, 'update'])->name('advisory.patch');
 
 Route::get('/contacto',  function () {
     return view('user.contact');
@@ -110,7 +111,7 @@ Route::get('/search', [UserController::class, 'search'])->name('search');
 
 Route::get('/perfil/{id}', [UserController::class, 'showExternalPerfil'])->name('user.externalPerfil');
 
-Route::post('seguir-usuario/{studentId}/{teacherId}',[UserController::class, 'followUser'])->name('followUser');
+Route::post('seguir-usuario/{studentId}/{teacherId}', [UserController::class, 'followUser'])->name('followUser');
 
 
 
@@ -124,9 +125,10 @@ Route::get('/crear-asesoria',  function () {
 Route::post('/crear/asesoria', [AdvisoryController::class, 'store'])->name('advisory.post');
 
 
-Route::get('/modificar-asesoria',  function () {
-    return view('advisory.modify');
-})->name('advisory.modify')->middleware('auth');
+Route::get('/modificar-asesoria/{advisoryId}', [AdvisoryController::class, 'edit'])->name('advisory.modify')->middleware('auth');
 
+Route::patch('/actualizar/{id}', [UserController::class, 'update'])->name('user.update.post');
 
-Route::post('subscribir-asesoria/{studentId}/{advisoryId}', [AdvisoryController::class,'subscribeAdvisory'])->name('subscribe.advisory');
+Route::delete('eliminar-asesoria/{id}', [AdvisoryController::class, 'destroy'])->name('advisory.delete');
+
+Route::post('subscribir-asesoria/{studentId}/{advisoryId}', [AdvisoryController::class, 'subscribeAdvisory'])->name('subscribe.advisory');

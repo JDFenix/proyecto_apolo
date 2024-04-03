@@ -52,7 +52,7 @@
                                         <h6 class="mb-2" style="position: absolute; margin-left:90%; margin-top:-2%">
                                             {{ $Oneadvisory->status }}
                                         </h6>
-                                        <a href="{{ route('advisory.modify') }}" style="background-color: #022D74"
+                                        <a href="{{ route('advisory.modify', ['advisoryId' => $Oneadvisory->id]) }}" style="background-color: #022D74"
                                             class="btn btn-primary rounded-pill mt-5 px-5 py-2">
                                             Modificar
                                         </a>

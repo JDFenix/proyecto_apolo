@@ -66,7 +66,7 @@
             transition: all 1s ease;
         }
 
-       
+
 
         .btn-secondary {
             background: #6C757D;
@@ -83,41 +83,47 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
                 <h1 class="text-center CustomTextColor ">Modificar asesoría</h1>
-                <form action="#" method="post" enctype="multipart/form-data" class="mx-auto">
+                <form action="{{ route('advisory.patch', $advisory->id) }}" method="post" enctype="multipart/form-data"
+                    class="mx-auto">
+                    @csrf
+                    @method('PATCH')
                     <div style="margin-left:15%">
 
                         <div class="form-group mt-5 mb-3">
                             <label for="topic">Alumnos</label>
                             <input style="width:83%" type="text" class="custom-input form-control" name=""
                                 id="">
+                            @foreach ($studentsAdvisory as $students)
+                                {{ $students->student_id }}
+                            @endforeach
                         </div>
 
                         <div class="form-group ">
                             <label for="date">Fecha</label>
                             <input style="width:40%" type="date" name="date" class="custom-input form-control"
-                                id="date">
+                                id="date" value="{{ $advisory->date }}">
                         </div>
 
                         <div class="form-group mt-3">
                             <label for="time">Hora</label>
                             <input style="width:40%" type="time" class="custom-input form-control" name="time"
-                                id="time">
+                                id="time" value="{{ $advisory->time }}">
                         </div>
 
                         <div class="form-group mt-3">
                             <label for="subject">Materia</label>
                             <input style="width:83%" type="text"
                                 class="custom-input custom-input-advisory-disabled form-control" name="subject"
-                                id="subject" value="" readonly>
+                                id="subject" value="{{ $advisory->subject }}" readonly>
                         </div>
 
                         <div class="form-group mt-3">
                             <label for="topic">Tema de la asesoría</label>
-                            <input style="width:83%" type="text" class="custom-input form-control" name=""
-                                id="">
+                            <input value="{{ $advisory->tittle }}" style="width:83%" type="text"
+                                class="custom-input form-control" name="tittle" id="">
                         </div>
 
-                        <div class="form-group mt-3 mb-3">
+                        {{-- <div class="form-group mt-3 mb-3">
                             <label for="icon" class="mb-3">Agregar Icono</label>
                             <div class="d-flex align-items-center">
                                 <div class="custom-control custom-radio mr-3">
@@ -130,7 +136,7 @@
                                     <label class="custom-control-label" for="icon2">No</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <div class="d-flex justify-content-center mt-2 mb-4 ">
@@ -146,16 +152,24 @@
                             <i class="fa-regular fa-floppy-disk"></i> Guardar
                         </button>
                     </div>
+                    <button type="submit" id="send-form" hidden></button>
                 </form>
             </div>
             <div class="col-md-6 d-flex flex-column align-items-center justify-content-start mt-5"
                 style=" position: absolute; right: 0; top:10%">
 
-                 <button style="color: inherit; background:none; border:none" data-bs-toggle="modal"
+
+                <button style="color: inherit; background:none; border:none" data-bs-toggle="modal"
                     data-bs-target="#deseasAbandonar">
                     <i class="fas fa-trash-alt fa-3x"></i>
-                    <p class="mt-3 text-center">Cancelar asesoría</p>
-                </button> 
+                    <p class="mt-3 text-center" t>Cancelar asesoría</p>
+                </button>
+                <form action="{{ route('advisory.delete', ['id' => $advisory]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" hidden id="delete-advisory"></button>
+                </form>
+
             </div>
 
         </div>
@@ -183,9 +197,8 @@
 
                 <!-- Footer del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary"
-                    onclick="window.location.href='/inicio'">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> 
+                    <button type="button" class="btn btn-primary"  onclick="document.getElementById('send-form').click()">Guardar</button>
                 </div>
 
             </div>
@@ -215,7 +228,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary"
-                        onclick="window.location.href='/inicio'">Eliminar</button>
+                        onclick="document.getElementById('delete-advisory').click()">Eliminar</button>
                 </div>
 
             </div>

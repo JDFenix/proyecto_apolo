@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 
 class AdvisoryController extends Controller
@@ -76,11 +77,101 @@ class AdvisoryController extends Controller
 
     public function store(StoreAdvisoryRequest $request)
     {
-        
+
         $advisory = $request->validated();
         $advisorycreated = Advisory::create($advisory);
 
-      
+
         return redirect()->route('home');
     }
+
+
+    public function edit(int $advisoryId)
+    {
+        $advisory = Advisory::findOrFail($advisoryId);
+        $studentsAdvisory = User_advisories::where('advisory_id', $advisoryId)->get();
+        return view('advisory.modify')->with([
+            'advisory' => $advisory,
+            'studentsAdvisory' => $studentsAdvisory
+        ]);
+    }
+    public function destroy(int $id)
+    {
+        try {
+            $advisory = Advisory::findOrFail($id);
+    
+            $studentsAdvisory = User_advisories::where('teachers_id', $id)->get();
+    
+            foreach ($studentsAdvisory as $studentAdvisory) {
+                $studentAdvisory->delete();
+            }
+    
+            $advisory->delete();
+    
+            return $this->index();
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function update(Request $request, int $id)
+{
+    try {
+        $advisory = Advisory::findOrFail($id);
+
+        $rules = [
+            'tittle' => ['required', 'string', 'max:191', 'regex:/^[\pL\s\-]+$/u'],
+        ];
+
+        if ($request->time != $advisory->time || $request->date != $advisory->date) {
+            $rules['time'] = [
+                'required',
+                'after_or_equal:08:00',
+                'before_or_equal:18:00',
+                function ($attribute, $value, $fail) use ($request, $id) { // Pass $id to the function
+                    $now = \Carbon\Carbon::now('America/Mexico_City');
+                    $format = (strlen($value) <= 5) ? 'H:i' : 'H:i:s';
+                    $time = \Carbon\Carbon::createFromFormat($format, $value, 'America/Mexico_City');
+
+                    $existingAdvisories = Advisory::where('teachers_id', auth()->user()->id)
+                        ->whereDate('date', $request->input('date'))
+                        ->where('id', '!=', $id) // Now $id is defined
+                        ->get();
+
+                    if (!$existingAdvisories->isEmpty()) {
+                        foreach ($existingAdvisories as $advisory) {
+                            if (\Carbon\Carbon::parse($value)->diffInMinutes(\Carbon\Carbon::parse($advisory->time)) < 60) {
+                                $fail('Debe haber al menos una hora entre el inicio de cada asesoría.');
+                            }
+                        }
+                    }
+                },
+            ];
+        }
+
+        if ($request->date != $advisory->date) {
+            $rules['date'] = [
+                'required',
+                'after:today',
+                function ($attribute, $value, $fail) {
+                    if (\Carbon\Carbon::parse($value)->diffInMinutes(\Carbon\Carbon::now()) < 30) {
+                        $fail('time.date_difference');
+                    }
+                },
+            ];
+        }
+
+        $request->validate($rules);
+
+        $advisory->update($request->only(['tittle', 'time', 'date']));
+
+        return $this->edit($id);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
+
+  
+    
 }
