@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'avatar'=> 'https://api.dicebear.com/7.x/miniavs/svg?seed='. Str::random(10),
             'email_verified_at' => now(),
             'date_birthday' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
-            'age' => $this->faker->numberBetween($min = 18, $max = 70), 
+            'image_cover' => $this->faker->image(null,1500,300),
             'sex'=> 'men',
             'phone_number' => $this->faker->phoneNumber,
             'password' => bcrypt('123456789'),

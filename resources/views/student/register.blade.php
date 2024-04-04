@@ -144,7 +144,7 @@
                 </div>
     </nav>
 
-
+ 
 
     <div class="container">
         <div class="row justify-content-center">
@@ -225,16 +225,7 @@
                                 <div class="alert alert-danger mt-3">{{ $message }}</div>
                             @enderror
 
-                            <div class="form-group  mt-3">
-                                <label for="age">Edad</label>
-                                <input type="number" class="form-control custom-input-teacher" name="age"
-                                    id="age"
-                                    onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))">
 
-                                @error('age')
-                                    <div class="alert alert-danger mt-3">{{ $message }}</div>
-                                @enderror
-                            </div>
 
                             <div class="form-group mt-3">
                                 <label for="sex">Genero</label>

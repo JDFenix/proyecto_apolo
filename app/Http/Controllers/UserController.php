@@ -18,7 +18,7 @@ use App\Models\Advisory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -30,13 +30,24 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
 
+
         $dataUser = $request->validated();
 
         $url = 'https://api.dicebear.com/7.x/miniavs/svg?seed=';
         $nameUser  = $dataUser['name'];
-        $dataUser['avatar'] = $url . $nameUser;
+        $dataUser['avatar'] = $url . $nameUser . Str::random(10);
 
+        $arrayImageCover = [
+            'https://th.bing.com/th/id/OIP.73Lcgf8QZLbPKSN29gPuXQHaBe?rs=1&pid=ImgDetMain',
+            'https://th.bing.com/th/id/R.9314cb243b8b47e32d15e10f4442a16d?rik=%2f4zhhe5OrlTfaA&pid=ImgRaw&r=0',
+            'https://th.bing.com/th/id/OIP.hXJ4lT8pFi5hXI56W5z77wHaE8?rs=1&pid=ImgDetMain',
+            'https://th.bing.com/th/id/OIP.CPU7UvkWzEDJPOm83SMmqAHaCe?rs=1&pid=ImgDetMain',
+            'https://th.bing.com/th/id/OIP.uzF4QTUsVM7wXSKL-6bF6AHaCe?rs=1&pid=ImgDetMain',
+            'https://i.pinimg.com/originals/aa/96/94/aa9694d4a2e2db1a5dfbabac200cc349.png'
+        ];
 
+        $dataUser['image_cover'] = $arrayImageCover[array_rand($arrayImageCover)];
+       
         $userCreated = User::create($dataUser);
 
         // $verificationCode = rand(100000, 999999);
@@ -70,15 +81,23 @@ class UserController extends Controller
         $yearRegistered = $userCreated->created_at->year;
         $studentEnrollment = $userCreated->id . $yearRegistered . $firstInitialName . random_int(100, 999);
 
+
+
         Students::create([
             'users_id' => $userCreated->id,
             'career' => $dataUser['career'],
-            'enrollment' => $studentEnrollment
+            'enrollment' => $studentEnrollment,
+
         ]);
     }
 
     public function registerTeacher(array $dataUser, object $userCreated)
     {
+        $arrayImageCover = [
+            'imagePrueba',
+            'image2',
+        ];
+
         Teachers::create([
             'users_id' => $userCreated->id,
             'license' => $dataUser['license'],
@@ -159,46 +178,43 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user_role = $user->rol;
-    
+
         $advisories = ($user_role == 'teacher')
             ? Advisory::where('teachers_id', $id)->get()
             : User_advisories::where('student_id', $id)->get();
-    
+
         $exists = User_Teacher::where('users_id', Auth::user()->id)
-                              ->where('teachers_id', $id)
-                              ->exists();
-    
+            ->where('teachers_id', $id)
+            ->exists();
+
         return view('user.externalPerfil')->with([
             'user' => $user,
             'advisories' => $advisories,
-            'exists' => $exists 
+            'exists' => $exists
         ]);
     }
-    
 
- 
+
+
     public function followUser(int $studentId, int $teacherId)
     {
         try {
             $existingRecord = User_Teacher::where('users_id', $studentId)
-                                          ->where('teachers_id', $teacherId)
-                                          ->first();
-    
+                ->where('teachers_id', $teacherId)
+                ->first();
+
             if ($existingRecord) {
                 $existingRecord->delete();
-              
             } else {
                 User_Teacher::create([
                     'users_id' => $studentId,
                     'teachers_id' => $teacherId
                 ]);
-              
             }
-    
+
             return redirect()->route('user.externalPerfil', ['id' => $teacherId]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al procesar la solicitud', 'exception' => $e->getMessage()], 500);
         }
     }
-    
 }

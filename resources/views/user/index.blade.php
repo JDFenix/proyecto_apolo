@@ -36,23 +36,26 @@
                                         </div>
                                     </div>
                                     @if (Auth::user()->rol == 'student')
-                                        <h6 class="mb-2" style="position: absolute; margin-left:90%; margin-top:-2%">
+                                        <h6 class="mb-2" style="position: absolute; margin-left:89%; margin-top:-2%">
                                             {{ $Oneadvisory->status }}
                                         </h6>
-                                        <form action="{{ route('subscribe.advisory', ['studentId' => Auth::user()->id, 'advisoryId' => $Oneadvisory->id]) }}" method="post">
+                                        <form
+                                            action="{{ route('subscribe.advisory', ['studentId' => Auth::user()->id, 'advisoryId' => $Oneadvisory->id]) }}"
+                                            method="post">
                                             @csrf
-                                            <input type="hidden" name="subscribe_token" value="{{ Session::get('subscribe_token') }}">
-                                            <button type="submit" class="btn btn-primary btn-custom rounded-pill mt-5 px-5 py-2">
+                                            <input type="hidden" name="subscribe_token"
+                                                value="{{ Session::get('subscribe_token') }}">
+                                            <button type="submit" style="background-color:#022D74"
+                                                class="btn btn-primary btn-custom rounded-pill mt-5 px-5 py-2">
                                                 {{ $Oneadvisory->isSubscribed ? 'Desuscribir' : 'Inscribir' }}
                                             </button>
                                         </form>
-                                        
-                                        
                                     @else
                                         <h6 class="mb-2" style="position: absolute; margin-left:90%; margin-top:-2%">
                                             {{ $Oneadvisory->status }}
                                         </h6>
-                                        <a href="{{ route('advisory.modify', ['advisoryId' => $Oneadvisory->id]) }}" style="background-color: #022D74"
+                                        <a href="{{ route('advisory.modify', ['advisoryId' => $Oneadvisory->id]) }}"
+                                            style="background-color: #022D74"
                                             class="btn btn-primary rounded-pill mt-5 px-5 py-2">
                                             Modificar
                                         </a>

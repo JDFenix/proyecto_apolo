@@ -92,10 +92,10 @@
                         <div class="form-group mt-5 mb-3">
                             <label for="topic">Alumnos</label>
                             <input style="width:83%" type="text" class="custom-input form-control" name=""
-                                id="">
-                            @foreach ($studentsAdvisory as $students)
-                                {{ $students->student_id }}
-                            @endforeach
+                                id=""
+                                value="  @foreach ($studentsAdvisory as $students)
+                                {{ $students->student_id }} @endforeach">
+
                         </div>
 
                         <div class="form-group ">
@@ -197,8 +197,9 @@
 
                 <!-- Footer del modal-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> 
-                    <button type="button" class="btn btn-primary"  onclick="document.getElementById('send-form').click()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="document.getElementById('send-form').click()">Guardar</button>
                 </div>
 
             </div>

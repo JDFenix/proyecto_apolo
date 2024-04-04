@@ -21,10 +21,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'rol',
         'avatar',
         'name',
+        'image_cover',
         'date_birthday',
         'maternal_surname',
         'paternal_surname',
-        'age',
+       
         'sex',
         'phone_number',
         'email',

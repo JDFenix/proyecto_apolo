@@ -30,7 +30,6 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'string', 'max:191', 'unique:users'],
             'date_birthday' => ['required', 'date', 'before_or_equal:today', 'after_or_equal:-110 years', 'after_or_equal:-110 years','before:18 years ago'],
             'sex' => ['required', 'string', 'max:191', 'regex:/^[\pL\s\-]+$/u'],
-            'age' => ['required', 'integer', 'min:18', 'max:110'],
             'phone_number' => ['required'],
             'password' => ['required', 'string', 'min:8']
 
@@ -67,11 +66,6 @@ class StoreUserRequest extends FormRequest
             'date_birthday.before' => 'Debes ser mayor a 18 años',
 
             'sex.required' => 'El género es obligatorio.',
-
-            'age.required' => 'El campo edad es obligatorio.',
-            'age.integer' => 'La edad debe ser un número entero.',
-            'age.min' => 'Debes tener al menos 18 años.',
-            'age.max' => 'No puedes tener más de 110 años.',
 
             'email.required' => 'El campo email es obligatorio.',
             'email.unique' => 'El email ya está en uso.',

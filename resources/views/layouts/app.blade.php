@@ -127,7 +127,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item nav-item nav-link" href="{{ route('user.contact') }}">
+                                        <a class="dropdown-item nav-item nav-link" href="/contacto">
                                             <i class='fas fa-question-circle'></i>{{ __(' Ayuda') }}
                                         </a>
                                     </li>

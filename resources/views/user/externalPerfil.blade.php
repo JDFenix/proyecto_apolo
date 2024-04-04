@@ -102,8 +102,8 @@
     </style>
     <div class="container mt-1">
         <div class="position-relative">
-            <img src="#" class="cover-photo mb-4" alt="">
-            <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
+            <img src="{{$user->image_cover}}" class="cover-photo mb-4" alt="">
+            {{-- <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button> --}}
             <img src="{{ $user->avatar }}" alt="Foto de perfil" class="profile-picture">
 
         </div>
@@ -147,31 +147,35 @@
                         @endif
                     </ul>
 
-                    <a class="btn btn-primary bi bi-pencil-square mt-2" href="{{ route('user.modify') }}"> Editar
-                        perfil</a>
+                    {{-- <a class="btn btn-primary bi bi-pencil-square mt-2" href="{{ route('user.modify') }}"> Editar
+                        perfil
+                    </a> --}}
                 </div>
             </div>
 
             <!-- Asesorias inscritas del alumno -->
-            <div class="col-md-8" style="position: absolute">
-                <form action="{{ route('followUser', ['studentId' => Auth::user()->id, 'teacherId' => $user->id]) }}" method="post">
+            <div class="col-md-8" style="position: absolute; margin-top:-2%">
+                <form action="{{ route('followUser', ['studentId' => Auth::user()->id, 'teacherId' => $user->id]) }}"
+                    method="post">
                     @csrf
-                    <button class="button-follow" type="submit" style="background: none; border:none">
-                        @if($exists)
-                            <i class="bi bi-patch-check-fill follow-icon custom-size-icon" style="left: -10%"></i> <!-- Icono de paloma -->
+                    <button class="button-follow" type="submit" style="background: none; border:none;margin-left:15%;">
+                        @if ($exists)
+                            <i class="bi bi-patch-check-fill follow-icon custom-size-icon" style="left: -20%"></i>
+                            <!-- Icono de paloma -->
                         @else
-                            <i class="bi bi-patch-plus-fill follow-icon custom-size-icon" style="left: -10%"></i> <!-- Icono normal -->
+                            <i class="bi bi-patch-plus-fill follow-icon custom-size-icon" style="left: -20%"></i>
+                            <!-- Icono normal -->
                         @endif
                     </button>
                 </form>
             </div>
-            
+
             @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
                 </div>
             @endif
-            
+
 
 
             @if (count($advisories) != 0)

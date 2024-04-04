@@ -80,11 +80,12 @@
     </style>
     <div class="container mt-1">
         <div class="position-relative">
-            <img src="#" class="cover-photo mb-4" alt="">
+            <img src="{{ Auth::user()->image_cover}}" class="cover-photo mb-4" alt="">
 
-            <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
+            {{-- <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button> --}}
             <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
         </div>
+
 
 
         <div class="row mt-3">

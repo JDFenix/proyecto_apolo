@@ -145,7 +145,7 @@
                                 <ul class="dropdown-menu" style="margin-left: 45%">
 
                                     <li>
-                                        <a class=" dropdown-item nav-item nav-link" href="{{ route('user.perfil') }}">
+                                        <a class=" dropdown-item nav-item nav-link" href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                                 <path

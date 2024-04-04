@@ -118,7 +118,7 @@
 
         <div class="position-relative">
             <img src="{{ Auth::user()->image_cover }}" class="cover-photo mb-4">
-            <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button>
+            {{-- <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button> --}}
             <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
         </div>
 
@@ -146,17 +146,17 @@
                                 <div class="col mb-2">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" class="form-control" id="nombre"
-                                        value="{{ Auth::user()->email }}" disabled>
+                                        value="{{ Auth::user()->name }}" disabled>
                                 </div>
                                 <div class="col">
                                     <label for="apellido-p">Apellido paterno:</label>
                                     <input type="text" class="form-control" id="apellido-p"
-                                        value="{{ Auth::user()->paternal_username }}" disabled>
+                                        value="{{ Auth::user()->paternal_surname }}" disabled>
                                 </div>
                                 <div class="col">
                                     <label for="apellido-m">Apellido materno:</label>
                                     <input type="text" class="form-control" id="apellido-m"
-                                        value="{{ Auth::user()->maternal_username }}" disabled>
+                                        value="{{ Auth::user()->maternal_surname }}" disabled>
                                 </div>
                             </div>
 
