@@ -16,7 +16,7 @@
                                                 style="width: 9%; border-radius: 15%;">
                                             <div class="ml-3" style="margin-left:1rem ">
                                                 <h5 class="card-title" >
-                                                   <p class="mt-3"> {{ $user->name }} {{ $user->paternal_surname }} {{ $user->maternal_surname }}</p>
+                                                   <p class="mt-3"> {{ $user->name }}{{ $user->paternal_surname }}{{ $user->maternal_surname }}</p>
                                                 </h5>
                                                 {{-- <p class="card-text">{{ $user->teacher->subject }}</p> --}}
                                             </div>

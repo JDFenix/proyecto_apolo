@@ -90,37 +90,32 @@ class AdvisoryController extends Controller
     {
         $advisory = Advisory::findOrFail($advisoryId);
         $userAdvisories = User_advisories::where('advisory_id', $advisoryId)->get();
-
-        $userIds = $userAdvisories->pluck('student_id')->toArray();
-
+        
+        $userIds = $userAdvisories->pluck('student_id')->toArray(); // Ajusta el nombre de la columna según sea necesario
+    
         $users = User::whereIn('id', $userIds)->get();
-
+    
         return view('advisory.modify')->with([
             'advisory' => $advisory,
             'users' => $users
         ]);
     }
+    
+    
 
-
-    public function deleteUser(Request $request, $userId, $advisoryId)
-    {
-        try {
-            User_advisories::where('student_id', $userId)->delete();
-            return redirect()->route('advisory.modify', ['advisoryId' => $advisoryId]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with(['error' => $e]);
-        }
-    }
 
 
     public function destroy(int $id)
     {
         try {
             $advisory = Advisory::findOrFail($id);
+
             $studentsAdvisory = User_advisories::where('advisory_id', $id)->get();
+
             foreach ($studentsAdvisory as $studentAdvisory) {
                 $studentAdvisory->delete();
             }
+
             $advisory->delete();
 
             return $this->index();

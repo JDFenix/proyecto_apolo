@@ -132,5 +132,3 @@ Route::patch('/actualizar/{id}', [UserController::class, 'update'])->name('user.
 Route::delete('eliminar-asesoria/{id}', [AdvisoryController::class, 'destroy'])->name('advisory.delete');
 
 Route::post('subscribir-asesoria/{studentId}/{advisoryId}', [AdvisoryController::class, 'subscribeAdvisory'])->name('subscribe.advisory');
-
-Route::post('/advisory/deleteUser/{userId}/{advisoryId}', [AdvisoryController::class, 'deleteUser'])->name('advisory.deleteUser');

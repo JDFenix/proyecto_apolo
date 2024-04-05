@@ -135,48 +135,8 @@
 
             @if (Auth::user()->rol == 'student')
                 <div class="col-md-8">
-                    @if ($advisories->isEmpty())
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <h3 class="text-center" style="color: #022D74;">No hay asesorías a las que esté
-                                        inscrito.</h3>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <h5 class="mt-4">Asesorías Inscritas</h5>
-                        <div class="list-group mb-4">
-                            @foreach ($advisories as $advisory)
-                                <a href="#" class="list-group-item list-group-item-primary active mt-1"
-                                    aria-current="true">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{ $advisory->tittle }}</h5>
-                                        <small>{{ $advisory->date }} {{ $advisory->time }}</small>
-                                    </div>
-                                    <small>{{ $advisory->subject }}</small>
-                                </a>
-                            @endforeach
-                        </div>
-                        {{-- {{ $advisories->links() }} --}}
-                    @endif
-                </div>
-            @endif
-
-
-            @if (Auth::user()->rol == 'teacher')
-
-            <div class="col-md-8">
-                @if ($advisories->isEmpty())
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <h3 class="text-center" style="color: #022D74;">No hay asesorías que haya craedo.</h3>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <h5 class="mt-4">Asesorías Creadas</h5>
+                @empty($advisories)
+                    <h5 class="mt-4">Asesorías Inscritas</h5>
                     <div class="list-group mb-4">
                         @foreach ($advisories as $advisory)
                             <a href="#" class="list-group-item list-group-item-primary active mt-1"
@@ -190,45 +150,79 @@
                         @endforeach
                     </div>
                     {{-- {{ $advisories->links() }} --}}
-                @endif
+                @else
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <h3 class="text-center" style=" color: #022D74;">No hay asesorías a las que esté inscrito.</h3>
+                            </div>
+                        </div>
+                    </div>
+                @endempty
             </div>
+        @endif
 
-            @endif
-
-
-
-
-        </div>
-
-
-
-
-
-        <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true" data-bs-backdrop="static">
-
-            <div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
-                <div class="modal-content">
-
-                    <!-- Título del modal-->
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5 color-letra" id="exampleModalLabel">¿DESEAS ABANDONAR LA ASESORIA? ⚠
-                        </h1>
+        @if (Auth::user()->rol == 'teacher')
+            <div class="col-md-8">
+            @empty($advisories)
+                <h5 class="mt-4">Asesorías impartidas</h5>
+                <div class="list-group mb-4">
+                    @foreach ($advisories as $advisory)
+                        <a href="#" class="list-group-item list-group-item-primary active mt-1"
+                            aria-current="true">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ $advisory->tittle }}</h5>
+                                <small>{{ $advisory->date }} {{ $advisory->time }}</small>
+                            </div>
+                            <small>{{ $advisory->subject }}</small>
+                        </a>
+                    @endforeach
+                </div>
+                {{-- {{ $advisories->links() }} --}}
+            @else
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h3 class="text-center" style=" color: #022D74;">No hay asesorías que haya creado.</h3>
                     </div>
-
-                    <!-- Contenido del modal-->
-                    <div class="modal-body">
-                        <p class="texto">Si abandonas la página, perderás los datos que hayas ingresado.</p>
-                    </div>
-
-                    <!-- Footer del modal-->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="window.location.href='/seleccionar/rol'">Abandonar</button>
-                    </div>
-
                 </div>
             </div>
+            @endempty
         </div>
-    @endsection
+    @endif
+
+
+
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+data-bs-backdrop="static">
+
+<div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
+    <div class="modal-content">
+
+        <!-- Título del modal-->
+        <div class="modal-header">
+            <h1 class="modal-title fs-5 color-letra" id="exampleModalLabel">¿DESEAS ABANDONAR LA ASESORIA? ⚠</h1>
+        </div>
+
+        <!-- Contenido del modal-->
+        <div class="modal-body">
+            <p class="texto">Si abandonas la página, perderás los datos que hayas ingresado.</p>
+        </div>
+
+        <!-- Footer del modal-->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary"
+                onclick="window.location.href='/seleccionar/rol'">Abandonar</button>
+        </div>
+
+    </div>
+</div>
+</div>
+@endsection
