@@ -90,16 +90,56 @@
                     <div style="margin-left:15%">
 
                         <div class="form-group mt-5 mb-4">
-                            <label for="topic">Alumnos registrados</label>
-                            <ul>
-                                @if ($users)
-                                    @foreach ($users as $user)
-                                        <li>{{ $user->name }} {{ $user->paternal_surname }} {{ $user->maternal_surname }}</li>
-                                    @endforeach
-                                @else
-                                no hay usuarios registrados
-                                @endif
-                            </ul>
+                            <label for="topic">Alumnos registrados:</label>
+                            @foreach ($users as $user)
+                                <li style="display: flex; align-items: center;" class="mb-2">
+                                    {{ $user->name }} {{ $user->paternal_surname }} {{ $user->maternal_surname }}
+
+
+                                    <button type="button"
+                                        style="color: inherit; background:none; border:none; margin-left: 10px;"
+                                        data-bs-toggle="modal" data-bs-target="#eliminar-alumno-modal-{{ $user->id }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+
+                                    <form
+                                        action="{{ route('advisory.deleteUser', ['userId' => $user->id, 'advisoryId' => $advisory->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit" hidden
+                                            id="delete-button-student-{{ $user->id }}"></button>
+                                    </form>
+
+                                    <div class="modal fade" id="eliminar-alumno-modal-{{ $user->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5 color-letra" id="exampleModalLabel">¿DESEAS
+                                                        ELIMINAR AL ALUMNO? 🗑</h1>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <p class="texto">Si decides eliminar a este alumno, tendrás que pedirle
+                                                        que se reinscriba. No podrás revertir esta acción.</p>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="document.getElementById('delete-button-student-{{ $user->id }}').click()">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+
+
+
+
 
 
                             <div class="form-group ">
@@ -127,20 +167,6 @@
                                     class="custom-input form-control" name="tittle" id="">
                             </div>
 
-                            {{-- <div class="form-group mt-3 mb-3">
-                            <label for="icon" class="mb-3">Agregar Icono</label>
-                            <div class="d-flex align-items-center">
-                                <div class="custom-control custom-radio mr-3">
-                                    <input class="form-check-input" type="radio" name="icon" id="icon" checked>
-                                    <label class="custom-control-label" for="icon">Sí</label>
-                                </div>
-                                <div style="margin-left:2rem" class="custom-control custom-radio">
-
-                                    <input class="form-check-input" type="radio" name="icon" id="icon2">
-                                    <label class="custom-control-label" for="icon2">No</label>
-                                </div>
-                            </div>
-                        </div> --}}
 
                         </div>
                         <div class="d-flex justify-content-center mt-2 mb-4 ">
@@ -166,7 +192,7 @@
                 <button style="color: inherit; background:none; border:none" data-bs-toggle="modal"
                     data-bs-target="#deseasAbandonar">
                     <i class="fas fa-trash-alt fa-3x"></i>
-                    <p class="mt-3 text-center" t>Cancelar asesoría</p>
+                    <p class="mt-3 text-center">Cancelar asesoría</p>
                 </button>
                 <form action="{{ route('advisory.delete', ['id' => $advisory]) }}" method="post">
                     @csrf
@@ -178,6 +204,8 @@
 
         </div>
     </div>
+
+
 
 
 

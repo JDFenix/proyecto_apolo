@@ -29,7 +29,7 @@
                                             <h5 class="card-title">{{ $Oneadvisory->tittle }}</h5>
                                             <p class="card-text">{{ $Oneadvisory->date }} {{ $Oneadvisory->time }}</p>
                                             @if (Auth::user()->rol == 'student')
-                                                {{ $Oneadvisory->subject }} {{ $Oneadvisory->teacher->name }}
+                                               Materia:{{ $Oneadvisory->subject }}   Maestro:{{ $Oneadvisory->teacher->name }}
                                             @else
                                                 {{ $Oneadvisory->subject }}
                                             @endif

@@ -102,7 +102,7 @@
     </style>
     <div class="container mt-1">
         <div class="position-relative">
-            <img src="{{$user->image_cover}}" class="cover-photo mb-4" alt="">
+            <img src="{{ $user->image_cover }}" class="cover-photo mb-4" alt="">
             {{-- <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button> --}}
             <img src="{{ $user->avatar }}" alt="Foto de perfil" class="profile-picture">
 
@@ -154,21 +154,23 @@
             </div>
 
             <!-- Asesorias inscritas del alumno -->
-            <div class="col-md-8" style="position: absolute; margin-top:-2%">
-                <form action="{{ route('followUser', ['studentId' => Auth::user()->id, 'teacherId' => $user->id]) }}"
-                    method="post">
-                    @csrf
-                    <button class="button-follow" type="submit" style="background: none; border:none;margin-left:15%;">
-                        @if ($exists)
-                            <i class="bi bi-patch-check-fill follow-icon custom-size-icon" style="left: -20%"></i>
-                            <!-- Icono de paloma -->
-                        @else
-                            <i class="bi bi-patch-plus-fill follow-icon custom-size-icon" style="left: -20%"></i>
-                            <!-- Icono normal -->
-                        @endif
-                    </button>
-                </form>
-            </div>
+            @if (Auth::user()->rol == 'student')
+                <div class="col-md-8" style="position: absolute; margin-top:-2%">
+                    <form action="{{ route('followUser', ['studentId' => Auth::user()->id, 'teacherId' => $user->id]) }}"
+                        method="post">
+                        @csrf
+                        <button class="button-follow" type="submit" style="background: none; border:none;margin-left:15%;">
+                            @if ($exists)
+                                <i class="bi bi-patch-check-fill follow-icon custom-size-icon" style="left: -20%"></i>
+                                <!-- Icono de paloma -->
+                            @else
+                                <i class="bi bi-patch-plus-fill follow-icon custom-size-icon" style="left: -20%"></i>
+                                <!-- Icono normal -->
+                            @endif
+                        </button>
+                    </form>
+                </div>
+            @endif
 
             @if (session()->has('message'))
                 <div class="alert alert-success">
@@ -180,7 +182,11 @@
 
             @if (count($advisories) != 0)
                 <div class="col-md-8">
+                    @if ($user->rol == 'teacher')
                     <h5 class="mt-4">Asesorías impartidas</h5>
+                    @else
+                   
+                    @endif
                     <div class="list-group mb-4">
                         @foreach ($advisories as $advisory)
                             <div class="list-group-item">

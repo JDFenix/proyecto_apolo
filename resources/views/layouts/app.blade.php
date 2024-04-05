@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <link rel="icon" href="{{ asset('images/icon_page.png') }}" type="image/x-icon">
-    <title>{{ env('app.name') }}</title>
+    <title>Advisory</title>
 </head>
 
 <body class="">
@@ -36,11 +36,11 @@
             <form id="search-form" class="form-inline my-2 my-lg-0 mx-auto position-relative" style="left: 25%"
                 action="{{ route('search') }}" method="GET">
                 @csrf
-                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Buscar" aria-label="Buscar"
+                <input class="form-control mr-sm-2 mt-3" type="search" name="search" placeholder="Buscar" aria-label="Buscar"
                     style="width: 190%;background-color: #EBEBED; box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);">
                 <button type="submit" style="background: none; border:none">
                     <span class="fa fa-search form-control-feedback position-absolute"
-                        style="right: 10px; top: 12px;left:175%"></span>
+                        style="right: 10px; top: 26px;left:175%"></span>
                 </button>
             </form>
 

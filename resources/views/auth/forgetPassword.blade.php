@@ -121,8 +121,7 @@
                 <div class="container form-container">
                     <h2 class="fw-bold mb-1 text-uppercase text-left CustomTextColor mb-4">¿Olvidaste tu contraseña?
                     </h2>
-                    <p class="text-dark-50 mb-3 text-center mb-5"><strong>Ingrese su email y le enviaremos<br>un enlace
-                            para restablecer la contraseña</strong></p>
+                    <p class="text-dark-50 mb-3 text-center mb-5"><strong>Ingrese su email </strong></p>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

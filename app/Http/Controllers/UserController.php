@@ -39,10 +39,9 @@ class UserController extends Controller
 
         $arrayImageCover = [
             'https://th.bing.com/th/id/OIP.73Lcgf8QZLbPKSN29gPuXQHaBe?rs=1&pid=ImgDetMain',
-            'https://th.bing.com/th/id/R.9314cb243b8b47e32d15e10f4442a16d?rik=%2f4zhhe5OrlTfaA&pid=ImgRaw&r=0',
-            'https://th.bing.com/th/id/OIP.hXJ4lT8pFi5hXI56W5z77wHaE8?rs=1&pid=ImgDetMain',
+        
             'https://th.bing.com/th/id/OIP.CPU7UvkWzEDJPOm83SMmqAHaCe?rs=1&pid=ImgDetMain',
-            'https://th.bing.com/th/id/OIP.uzF4QTUsVM7wXSKL-6bF6AHaCe?rs=1&pid=ImgDetMain',
+            'https://cdn.wallpapersafari.com/63/57/kTJI23.jpeg',
             'https://i.pinimg.com/originals/aa/96/94/aa9694d4a2e2db1a5dfbabac200cc349.png'
         ];
 
@@ -151,18 +150,14 @@ class UserController extends Controller
             $teacher = Teachers::where('users_id', $id)->first();
             $advisories = $teacher->advisories()->orderBy('date', 'asc')->take(4)->get();
             return view('user.perfil', ['advisories' => $advisories]);
+
         } elseif (Auth::user()->rol == 'student') {
           
             $userAdvisories = User_advisories::where('student_id', $id)->get();
-            
-          
             $advisoryIds = [];
-        
-          
             foreach ($userAdvisories as $userAdvisory) {
                 $advisoryIds[] = $userAdvisory->advisory_id;
             }
-        
         
             $advisories = Advisory::whereIn('id', $advisoryIds)
                                 ->orderBy('date', 'asc') 
