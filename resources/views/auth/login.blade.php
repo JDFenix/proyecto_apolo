@@ -60,6 +60,9 @@
                                 </span>
                             @enderror
                         </div>
+                        @if (session('errorLogin'))
+                            <div class="alert alert-danger mt-3">{{ session('errorLogin') }}</div>
+                        @endif
 
                         <button type="submit" class="btn btn-login btn_hover btn-lg px-5 btnGran">
                             {{ __('Iniciar sesión') }}
@@ -86,7 +89,7 @@
             </div>
         </div>
     </div>
-   
+
 
 </body>
 

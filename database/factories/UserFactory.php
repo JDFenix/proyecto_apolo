@@ -23,6 +23,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $arrayImageCover = [
+            'https://th.bing.com/th/id/OIP.73Lcgf8QZLbPKSN29gPuXQHaBe?rs=1&pid=ImgDetMain',
+            'https://cdn.statically.io/img/timelinecovers.pro/facebook-cover/download/ultra-hd-stars-facebook-cover.jpg',
+            'https://th.bing.com/th/id/OIP.hXJ4lT8pFi5hXI56W5z77wHaE8?rs=1&pid=ImgDetMain',
+            'https://th.bing.com/th/id/OIP.CPU7UvkWzEDJPOm83SMmqAHaCe?rs=1&pid=ImgDetMain',
+            'https://th.bing.com/th/id/OIP.uzF4QTUsVM7wXSKL-6bF6AHaCe?rs=1&pid=ImgDetMain',
+            'https://i.pinimg.com/originals/aa/96/94/aa9694d4a2e2db1a5dfbabac200cc349.png'
+        ];
         return [
             'name' => $this->faker->name,
             'paternal_surname' => $this->faker->lastName,
@@ -30,7 +38,7 @@ class UserFactory extends Factory
             'avatar'=> 'https://api.dicebear.com/7.x/miniavs/svg?seed='. Str::random(10),
             'email_verified_at' => now(),
             'date_birthday' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
-            'image_cover' => $this->faker->image(null,1500,300),
+            'image_cover' =>$arrayImageCover[array_rand($arrayImageCover)],
             'sex'=> 'men',
             'phone_number' => $this->faker->phoneNumber,
             'password' => bcrypt('123456789'),

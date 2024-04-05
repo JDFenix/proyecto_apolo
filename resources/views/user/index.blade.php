@@ -66,7 +66,14 @@
                     @endforeach
                 @else
                     @if (Auth::user()->rol == 'student')
-                        <div class="alert alert-danger mt-3">No hay asesorias a inscribirse</div>
+                   
+                        <div class="container mb-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <h1 class="text-center" style=" color: #022D74;">No hay asesorias a inscribirse</h1>
+                                </div>
+                            </div>
+                        </div>
                     @else
                         <div class="container">
                             <div class="row justify-content-center">

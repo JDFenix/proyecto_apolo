@@ -144,7 +144,7 @@
                 </div>
     </nav>
 
- 
+
 
     <div class="container">
         <div class="row justify-content-center">
@@ -157,7 +157,6 @@
                     <div class="form-group mt-5">
                         <label for="name">Nombre(s)*</label>
                         <input type="text" name="name" class="custom-input-teacher form-control" id="name">
-
                         @error('name')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
@@ -167,21 +166,21 @@
                         <label for="paternal_surname">Apellido paterno*</label>
                         <input type="text" class="form-control custom-input-teacher" name="paternal_surname"
                             id="paternal_surname">
-
                         @error('paternal_surname')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
-
                     </div>
-                    <div class="form-group  mt-3">
+
+                    <div class="form-group mt-3">
                         <label for="maternal_surname">Apellido materno*</label>
                         <input type="text" class="form-control custom-input-teacher" name="maternal_surname"
                             id="maternal_surname">
-
                         @error('maternal_surname')
                             <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
+
+
                     <div class="form-group  mt-3">
                         <label for="date_birthday">Fecha de nacimiento</label>
                         <input type="date" class="form-control custom-input-teacher" name="date_birthday"
@@ -298,6 +297,32 @@
         </div>
     </div>
 
+    <script>
+        // Función para capitalizar la primera letra de cada palabra
+        function capitalizeFirstLetter(str) {
+            return str.replace(/\b\w/g, function(char) {
+                return char.toUpperCase();
+            });
+        }
+
+        // Obtener los elementos de entrada por su ID
+        var nameInput = document.getElementById('name');
+        var paternalInput = document.getElementById('paternal_surname');
+        var maternalInput = document.getElementById('maternal_surname');
+
+        // Agregar escuchadores de eventos para los eventos de entrada de texto
+        nameInput.addEventListener('input', function() {
+            this.value = capitalizeFirstLetter(this.value);
+        });
+
+        paternalInput.addEventListener('input', function() {
+            this.value = capitalizeFirstLetter(this.value);
+        });
+
+        maternalInput.addEventListener('input', function() {
+            this.value = capitalizeFirstLetter(this.value);
+        });
+    </script>
     
 <style>
     .texto-azul {

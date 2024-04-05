@@ -89,12 +89,22 @@ class AdvisoryController extends Controller
     public function edit(int $advisoryId)
     {
         $advisory = Advisory::findOrFail($advisoryId);
-        $studentsAdvisory = User_advisories::where('advisory_id', $advisoryId)->get();
+        $userAdvisories = User_advisories::where('advisory_id', $advisoryId)->get();
+        
+        $userIds = $userAdvisories->pluck('student_id')->toArray(); // Ajusta el nombre de la columna según sea necesario
+    
+        $users = User::whereIn('id', $userIds)->get();
+    
         return view('advisory.modify')->with([
             'advisory' => $advisory,
-            'studentsAdvisory' => $studentsAdvisory
+            'users' => $users
         ]);
     }
+    
+    
+
+
+
     public function destroy(int $id)
     {
         try {

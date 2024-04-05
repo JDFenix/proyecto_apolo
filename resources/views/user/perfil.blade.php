@@ -80,7 +80,7 @@
     </style>
     <div class="container mt-1">
         <div class="position-relative">
-            <img src="{{ Auth::user()->image_cover}}" class="cover-photo mb-4" alt="">
+            <img src="{{ Auth::user()->image_cover }}" class="cover-photo mb-4" alt="">
 
             {{-- <button class="btn btn-primary edit-cover-button bi bi-pencil-square"> Editar Portada</button> --}}
             <img src="{{ Auth::user()->avatar }}" alt="Foto de perfil" class="profile-picture">
@@ -90,8 +90,8 @@
 
         <div class="row mt-3">
             <div class="col-md-12">
-                <h4 class="text-center profile-name">{{ __('roles.' . Auth::user()->rol) }} {{ Auth::user()->name }}
-                    {{ Auth::user()->paternal_surname }} {{ Auth::user()->maternal_surname }}</h4>
+                <h2 class="text-center profile-name">{{ __('roles.' . Auth::user()->rol) }} {{ Auth::user()->name }}
+                    {{ Auth::user()->paternal_surname }} {{ Auth::user()->maternal_surname }}</h2>
             </div>
         </div>
 
@@ -109,7 +109,7 @@
                             <li class="list-group-item"><strong>Carrera: </strong>{{ Auth::user()->student->career }}</li>
                             <li class="list-group-item"><strong>Sexo: </strong>{{ __('sex.' . Auth::user()->sex) }}</li>
                             <li class="list-group-item"><strong>Rol: </strong>{{ __('roles.' . Auth::user()->rol) }}</li>
-                        
+
                             </li>
                         @endif
                         @if (Auth::user()->rol == 'teacher')
@@ -135,67 +135,41 @@
 
             @if (Auth::user()->rol == 'student')
                 <div class="col-md-8">
-                    <h5 class="mt-4">Asesorías inscritas</h5>
+                @empty($advisories)
+                    <h5 class="mt-4">Asesorías Inscritas</h5>
                     <div class="list-group mb-4">
-                        <a href="#" class="list-group-item list-group-item-primary active" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small>Fecha y hora</small>
-                            </div>
-                            {{-- <p class="mb-1">Salón de la asesoría</p> --}}
-                            <small>Nombre del profesor y materia</small>
-                            {{-- <button class="btn btn-danger justify-content-end"
-                                style="height: 2rem; padding:.2rem; margin-left:59.4%" data-bs-toggle="modal"
-                                data-bs-target="#deseas-salir-asesoria">Salir de la asesoria</button> --}}
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small class="text-body-secondary">Fecha y hora</small>
-                            </div>
-                            {{-- <p class="mb-1">Salón de la asesoría</p> --}}
-                            <small class="text-body-secondary">Nombre del profesor y materia</small>
-                            {{-- <button class="btn btn-danger justify-content-end"
-                                style="height: 2rem; padding:.2rem; margin-left:59.4%" data-bs-toggle="modal"
-                                data-bs-target="#deseas-salir-asesoria">Salir de la asesoria</button> --}}
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Tema de la asesoría</h5>
-                                <small class="text-body-secondary">Fecha y hora</small>
-                            </div>
-                            {{-- <p class="mb-1">Salón de la asesoría</p> --}}
-                            <small class="text-body-secondary">Nombre del profesor y materia</small>
-                            {{-- <button class="btn btn-danger justify-content-end"
-                                style="height: 2rem; padding:.2rem; margin-left:59.4%" data-bs-toggle="modal"
-                                data-bs-target="#deseas-salir-asesoria">Salir de la asesoria</button> --}}
-                        </a>
+                        @foreach ($advisories as $advisory)
+                            <a href="#" class="list-group-item list-group-item-primary active mt-1"
+                                aria-current="true">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ $advisory->tittle }}</h5>
+                                    <small>{{ $advisory->date }} {{ $advisory->time }}</small>
+                                </div>
+                                <small>{{ $advisory->subject }}</small>
+                            </a>
+                        @endforeach
                     </div>
+                    {{-- {{ $advisories->links() }} --}}
+                @else
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <h3 class="text-center" style=" color: #022D74;">No hay asesorías a las que esté inscrito.</h3>
+                            </div>
+                        </div>
+                    </div>
+                @endempty
+            </div>
+        @endif
 
-                    <!-- Barra de paginación -->
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <span class="page-link">Anterior</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">2</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-            @endif
-
-            @if (Auth::user()->rol == 'teacher')
+        @if (Auth::user()->rol == 'teacher')
             <div class="col-md-8">
+            @empty($advisories)
                 <h5 class="mt-4">Asesorías impartidas</h5>
                 <div class="list-group mb-4">
                     @foreach ($advisories as $advisory)
-                    <a href="#" class="list-group-item list-group-item-primary active mt-1" aria-current="true">
+                        <a href="#" class="list-group-item list-group-item-primary active mt-1"
+                            aria-current="true">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ $advisory->tittle }}</h5>
                                 <small>{{ $advisory->date }} {{ $advisory->time }}</small>
@@ -205,41 +179,50 @@
                     @endforeach
                 </div>
                 {{-- {{ $advisories->links() }} --}}
+            @else
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h3 class="text-center" style=" color: #022D74;">No hay asesorías que haya creado.</h3>
+                    </div>
+                </div>
             </div>
-        @endif
-        
-
-
+            @endempty
         </div>
-    </div>
+    @endif
+
+
+
+</div>
+</div>
 
 
 
 
-    <div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        data-bs-backdrop="static">
+<div class="modal fade" id="deseas-salir-asesoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+data-bs-backdrop="static">
 
-        <div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
-            <div class="modal-content">
+<div class="modal-dialog modal-dialog-centered"> <!-- Modal centrado -->
+    <div class="modal-content">
 
-                <!-- Título del modal-->
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 color-letra" id="exampleModalLabel">¿DESEAS ABANDONAR LA ASESORIA? ⚠</h1>
-                </div>
-
-                <!-- Contenido del modal-->
-                <div class="modal-body">
-                    <p class="texto">Si abandonas la página, perderás los datos que hayas ingresado.</p>
-                </div>
-
-                <!-- Footer del modal-->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary"
-                        onclick="window.location.href='/seleccionar/rol'">Abandonar</button>
-                </div>
-
-            </div>
+        <!-- Título del modal-->
+        <div class="modal-header">
+            <h1 class="modal-title fs-5 color-letra" id="exampleModalLabel">¿DESEAS ABANDONAR LA ASESORIA? ⚠</h1>
         </div>
+
+        <!-- Contenido del modal-->
+        <div class="modal-body">
+            <p class="texto">Si abandonas la página, perderás los datos que hayas ingresado.</p>
+        </div>
+
+        <!-- Footer del modal-->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary"
+                onclick="window.location.href='/seleccionar/rol'">Abandonar</button>
+        </div>
+
     </div>
+</div>
+</div>
 @endsection

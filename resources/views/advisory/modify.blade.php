@@ -89,41 +89,45 @@
                     @method('PATCH')
                     <div style="margin-left:15%">
 
-                        <div class="form-group mt-5 mb-3">
-                            <label for="topic">Alumnos</label>
-                            <input style="width:83%" type="text" class="custom-input form-control" name=""
-                                id=""
-                                value="  @foreach ($studentsAdvisory as $students)
-                                {{ $students->student_id }} @endforeach">
+                        <div class="form-group mt-5 mb-4">
+                            <label for="topic">Alumnos registrados</label>
+                            <ul>
+                                @if ($users)
+                                    @foreach ($users as $user)
+                                        <li>{{ $user->name }} {{ $user->paternal_surname }} {{ $user->maternal_surname }}</li>
+                                    @endforeach
+                                @else
+                                no hay usuarios registrados
+                                @endif
+                            </ul>
 
-                        </div>
 
-                        <div class="form-group ">
-                            <label for="date">Fecha</label>
-                            <input style="width:40%" type="date" name="date" class="custom-input form-control"
-                                id="date" value="{{ $advisory->date }}">
-                        </div>
+                            <div class="form-group ">
+                                <label for="date">Fecha</label>
+                                <input style="width:40%" type="date" name="date" class="custom-input form-control"
+                                    id="date" value="{{ $advisory->date }}">
+                            </div>
 
-                        <div class="form-group mt-3">
-                            <label for="time">Hora</label>
-                            <input style="width:40%" type="time" class="custom-input form-control" name="time"
-                                id="time" value="{{ $advisory->time }}">
-                        </div>
+                            <div class="form-group mt-3">
+                                <label for="time">Hora</label>
+                                <input style="width:40%" type="time" class="custom-input form-control" name="time"
+                                    id="time" value="{{ $advisory->time }}">
+                            </div>
 
-                        <div class="form-group mt-3">
-                            <label for="subject">Materia</label>
-                            <input style="width:83%" type="text"
-                                class="custom-input custom-input-advisory-disabled form-control" name="subject"
-                                id="subject" value="{{ $advisory->subject }}" readonly>
-                        </div>
+                            <div class="form-group mt-3">
+                                <label for="subject">Materia</label>
+                                <input style="width:83%" type="text"
+                                    class="custom-input custom-input-advisory-disabled form-control" name="subject"
+                                    id="subject" value="{{ $advisory->subject }}" readonly>
+                            </div>
 
-                        <div class="form-group mt-3">
-                            <label for="topic">Tema de la asesoría</label>
-                            <input value="{{ $advisory->tittle }}" style="width:83%" type="text"
-                                class="custom-input form-control" name="tittle" id="">
-                        </div>
+                            <div class="form-group mt-3">
+                                <label for="topic">Tema de la asesoría</label>
+                                <input value="{{ $advisory->tittle }}" style="width:83%" type="text"
+                                    class="custom-input form-control" name="tittle" id="">
+                            </div>
 
-                        {{-- <div class="form-group mt-3 mb-3">
+                            {{-- <div class="form-group mt-3 mb-3">
                             <label for="icon" class="mb-3">Agregar Icono</label>
                             <div class="d-flex align-items-center">
                                 <div class="custom-control custom-radio mr-3">
@@ -138,21 +142,21 @@
                             </div>
                         </div> --}}
 
-                    </div>
-                    <div class="d-flex justify-content-center mt-2 mb-4 ">
+                        </div>
+                        <div class="d-flex justify-content-center mt-2 mb-4 ">
 
-                        <button type="button"
-                            class=" btn-height btn  btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor btn btn- "
-                            data-bs-toggle="modal" data-bs-target="#deseasAbandonar-regresar">
-                            <i class="fas fa-arrow-left"></i> Regresar
-                        </button>
-                        <button type="button"
-                            class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3"
-                            data-bs-toggle="modal" data-bs-target="#deseasGuardar">
-                            <i class="fa-regular fa-floppy-disk"></i> Guardar
-                        </button>
-                    </div>
-                    <button type="submit" id="send-form" hidden></button>
+                            <button type="button"
+                                class=" btn-height btn  btn_hover border-custom btn-whitout-border rounded-pill mt-3 mr-3 CustomTextColor btn btn- "
+                                data-bs-toggle="modal" data-bs-target="#deseasAbandonar-regresar">
+                                <i class="fas fa-arrow-left"></i> Regresar
+                            </button>
+                            <button type="button"
+                                class="btn-height btn btn-primary btn-custom btn_hover rounded-pill mt-3 ml-3"
+                                data-bs-toggle="modal" data-bs-target="#deseasGuardar">
+                                <i class="fa-regular fa-floppy-disk"></i> Guardar
+                            </button>
+                        </div>
+                        <button type="submit" id="send-form" hidden></button>
                 </form>
             </div>
             <div class="col-md-6 d-flex flex-column align-items-center justify-content-start mt-5"

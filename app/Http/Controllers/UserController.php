@@ -47,7 +47,7 @@ class UserController extends Controller
         ];
 
         $dataUser['image_cover'] = $arrayImageCover[array_rand($arrayImageCover)];
-       
+
         $userCreated = User::create($dataUser);
 
         // $verificationCode = rand(100000, 999999);
@@ -145,11 +145,36 @@ class UserController extends Controller
 
     public function showPerfil($id)
     {
-        $teacher = Teachers::where('users_id', $id)->first();
+
+
         if (Auth::user()->rol == 'teacher') {
+            $teacher = Teachers::where('users_id', $id)->first();
             $advisories = $teacher->advisories()->orderBy('date', 'asc')->take(4)->get();
             return view('user.perfil', ['advisories' => $advisories]);
+        } elseif (Auth::user()->rol == 'student') {
+          
+            $userAdvisories = User_advisories::where('student_id', $id)->get();
+            
+          
+            $advisoryIds = [];
+        
+          
+            foreach ($userAdvisories as $userAdvisory) {
+                $advisoryIds[] = $userAdvisory->advisory_id;
+            }
+        
+        
+            $advisories = Advisory::whereIn('id', $advisoryIds)
+                                ->orderBy('date', 'asc') 
+                                ->take(7) 
+                                ->get();
+        
+            return view('user.perfil', ['advisories' => $advisories]);
         }
+        
+        
+
+
         return view('user.perfil');
     }
 

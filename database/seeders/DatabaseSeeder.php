@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             // Crear un registro en la tabla de students con el id del usuario creado
             \App\Models\Students::create([
                 'users_id' => $student->id,
-                'career'=> rand(1000000000, 9999999999),
+                'career'=> str::random(8),
                 'enrollment' => rand(1000000000, 9999999999)
             ]);
         
